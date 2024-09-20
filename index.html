@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Peaches Hub</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
     <style>
         body {
             background-color: #121111;
@@ -13,6 +14,7 @@
             padding: 20px;
         }
 
+        /* Centered Header and Buttons */
         .header {
             text-align: center;
             margin-top: 100px;
@@ -52,6 +54,7 @@
             transform: translateY(-2px);
         }
 
+        /* Updated Product Card */
         .product-card {
             background-color: #2B2B2B;
             padding: 20px;
@@ -128,6 +131,7 @@
             transform: translateY(-2px);
         }
 
+        /* Admin Login Styling */
         .admin-container {
             text-align: center;
             margin-top: 20px;
@@ -169,6 +173,9 @@
         </div>
     </div>
 
+    <!-- Product Card Section -->
+    <div id="productCards"></div>
+
     <!-- Admin Section -->
     <div class="admin-container">
         <button class="login-btn" id="loginBtn">Admin Login</button>
@@ -181,40 +188,55 @@
             const loginBtn = document.getElementById('loginBtn');
             const loggedInMessage = document.getElementById('loggedInMessage');
             const dashboardBtn = document.getElementById('dashboardBtn');
+            const productCards = document.getElementById('productCards');
+
+            // Fetch products from the database
+            fetch('/api/products')
+                .then(response => response.json())
+                .then(data => {
+                    data.products.forEach(product => {
+                        const productCard = document.createElement('div');
+                        productCard.classList.add('product-card');
+                        productCard.innerHTML = `
+                            <div>
+                                <img src="${product.image}" alt="${product.name}" />
+                            </div>
+                            <div class="product-details">
+                                <h3 class="product-name">${product.name}</h3>
+                                <p class="product-description">${product.description}</p>
+                                <p class="product-price">$${product.price}</p>
+                                <p class="product-availability">${product.availability}</p>
+                                <a href="https://peachesservices.com/product/${product.name.replace(/\s+/g, '-').toLowerCase()}" class="product-link">
+                                    Buy Now <i class="fas fa-shopping-cart"></i>
+                                </a>
+                            </div>
+                        `;
+                        productCards.appendChild(productCard);
+                    });
+                });
 
             // Check if already logged in
-            fetch('/api/auth/status', { credentials: 'include' })
-            .then(response => response.json())
-            .then(data => {
-                if (data.isLoggedIn) {
-                    loginBtn.style.display = 'none';
-                    loggedInMessage.style.display = 'block';
-                    dashboardBtn.style.display = 'block';
-                    loggedInMessage.innerText = 'Logged in as: ' + data.username;
-                }
-            });
+            const storedUsername = localStorage.getItem('username');
+            if (storedUsername) {
+                loginBtn.style.display = 'none';
+                loggedInMessage.style.display = 'block';
+                dashboardBtn.style.display = 'block';
+                loggedInMessage.innerText = 'Logged in as: ' + storedUsername;
+            }
 
             loginBtn.addEventListener('click', () => {
                 const username = prompt('Enter Admin Username:');
                 const password = prompt('Enter Admin Password:');
                 
-                fetch('/api/auth/login', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ username, password }),
-                    credentials: 'include'
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        loginBtn.style.display = 'none';
-                        loggedInMessage.style.display = 'block';
-                        dashboardBtn.style.display = 'block';
-                        loggedInMessage.innerText = 'Logged in as: ' + username;
-                    } else {
-                        alert('Invalid login details.');
-                    }
-                });
+                if (username === 'PeachesServices2024' && password === 'PeachTerps1963@') {
+                    localStorage.setItem('username', username);
+                    loginBtn.style.display = 'none';
+                    loggedInMessage.style.display = 'block';
+                    dashboardBtn.style.display = 'block';
+                    loggedInMessage.innerText = 'Logged in as: ' + username;
+                } else {
+                    alert('Invalid login details.');
+                }
             });
 
             // Redirect to Admin Dashboard
