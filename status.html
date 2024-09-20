@@ -3,52 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Peaches Status</title>
+    <title>Cheat Status Page</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            background-color: #1a1a1a;
+            color: white;
             text-align: center;
-            padding: 20px;
         }
-
         h1 {
-            color: #ff6347;
-            font-size: 2.5em;
+            margin-top: 20px;
+            font-size: 36px;
+            font-weight: bold;
         }
-
-        p {
-            font-size: 1.2em;
-            color: #333;
+        h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
         }
-
-        .status {
-            font-size: 1.5em;
-            color: green;
+        .status-box {
+            display: inline-block;
+            width: 80%;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            position: relative;
+            animation: glow 2s infinite alternate;
         }
-
-        .error {
-            color: red;
-        }
-
-        a {
+        .status-box.green { background-color: #28a745; } /* Operational */
+        .status-box.orange { background-color: #ffcc00; } /* Use at own risk */
+        .status-box.white { background-color: #f0f0f0; color: black; } /* Testing */
+        .status-box.blue { background-color: #007bff; } /* Updating */
+        .status-box.red { background-color: #dc3545; } /* DTC - Do not use */
+        .status-box button {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #ffffff;
+            color: #000000;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
             text-decoration: none;
-            color: #007BFF;
-            display: block;
-            margin: 10px 0;
-            font-size: 1.2em;
+        }
+        .status-box button:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* Glow effect */
+        @keyframes glow {
+            from { box-shadow: 0 0 10px #fff; }
+            to { box-shadow: 0 0 20px #fff; }
+        }
+
+        /* Table for status meanings */
+        table {
+            margin: 20px auto;
+            width: 80%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid white;
+        }
+        th, td {
+            padding: 15px;
+            text-align: center;
+        }
+        th {
+            background-color: #333;
+        }
+        td {
+            background-color: #444;
         }
     </style>
 </head>
 <body>
-    <h1>Service Status</h1>
 
-    <p>Current status of our services:</p>
-    <p class="status">All systems operational.</p>
-    <!-- You can change the status dynamically as needed -->
-    <!-- Example of an error message -->
-    <!-- <p class="error">Service downtime due to maintenance.</p> -->
+    <h1>Cheat Status</h1>
 
-    <p><a href="index.html">Back to Home</a></p>
+    <!-- Example Game and Cheat Name -->
+    <h2>Fivem</h2>
+    <div class="status-box green">
+        Macho Chair
+        <button onclick="window.location.href='https://sellauth-link-to-macho-chair.com';">Purchase</button>
+    </div>
+
+    <!-- Table for Status Explanation -->
+    <h2>Status Colors Explanation</h2>
+    <table>
+        <tr>
+            <th>Color</th>
+            <th>Status</th>
+        </tr>
+        <tr>
+            <td style="background-color: #28a745;">Green</td>
+            <td>Operational</td>
+        </tr>
+        <tr>
+            <td style="background-color: #ffcc00;">Orange</td>
+            <td>Use at own risk</td>
+        </tr>
+        <tr>
+            <td style="background-color: #f0f0f0; color: black;">White</td>
+            <td>Testing</td>
+        </tr>
+        <tr>
+            <td style="background-color: #007bff;">Blue</td>
+            <td>Updating</td>
+        </tr>
+        <tr>
+            <td style="background-color: #dc3545;">Red</td>
+            <td>DTC - Do not use</td>
+        </tr>
+    </table>
+
 </body>
 </html>
