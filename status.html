@@ -3,105 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cheat Status - Peaches Services</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <title>Cheat Status - InjectKings</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
         body {
-            background-color: #121111;
+            background-color: #1a1a1a;
             color: white;
             font-family: Arial, sans-serif;
             padding: 20px;
         }
-        h1 {
+
+        h1, h2 {
             text-align: center;
-            font-size: 2.5rem;
-            font-weight: bold;
-            margin-bottom: 20px;
             color: #f80000;
         }
+
         .status-container {
             max-width: 1000px;
             margin: 0 auto;
+            padding: 20px;
+            background-color: #121212;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
         }
+
         .status-bar {
-            position: relative;
-            background-color: #2B2B2B;
-            border-radius: 5px;
-            padding: 15px;
-            margin: 15px 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
-            transition: all 0.3s ease-in-out;
-        }
-        .status-bar .product-name {
-            font-size: 1.2rem;
-            font-weight: bold;
-        }
-        .status-bar .status-indicator {
-            width: 15px;
-            height: 15px;
-            border-radius: 50%;
-            margin-right: 10px;
-            transition: all 0.3s ease-in-out;
-        }
-        .status-bar.green {
-            border: 2px solid #45ba64;
-            background: linear-gradient(90deg, rgba(0,128,0,0.25) 0%, rgba(60,255,60,0.25) 50%, rgba(197,255,197,0) 100%);
-        }
-        .status-bar.orange {
-            border: 2px solid orange;
-            background: linear-gradient(90deg, rgba(255,218,151,0.25) 10%, rgba(255,165,0,0.25) 50%, rgba(99,0,0,0) 100%);
-        }
-        .status-bar.white {
-            border: 2px solid rgb(229, 255, 0);
-            background: linear-gradient(90deg, rgba(197, 200, 0, 0.25) 10%, rgba(238, 255, 0, 0.25) 50%, rgba(251, 255, 197, 0) 100%);
-        }
-        .status-bar.blue {
-            border: 2px solid #3498db;
-            background: linear-gradient(90deg, rgba(82,152,219,0.25) 10%, rgba(52,152,219,0.25) 50%, rgba(197,255,197,0) 100%);
-        }
-        .status-bar.red {
-            border: 2px solid red;
-            background: linear-gradient(90deg, rgba(200,0,0,0.25) 10%, rgba(255,0,0,0.25) 50%, rgba(197,255,197,0) 100%);
-        }
-        .status-bar a {
             padding: 10px 20px;
+            margin: 15px 0;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .status-bar a {
+            padding: 8px 15px;
             background-color: #f80000;
             color: white;
             text-decoration: none;
             border-radius: 5px;
-            transition: background-color 0.3s ease-in-out;
+            transition: background-color 0.3s ease;
         }
+
         .status-bar a:hover {
-            background-color: #e00000;
+            background-color: #d80000;
         }
-        .status-table {
+
+        /* Status Color Bars */
+        .green { background-color: #2ecc71; }
+        .orange { background-color: #e67e22; }
+        .white { background-color: #f1c40f; }
+        .blue { background-color: #3498db; }
+        .red { background-color: #e74c3c; }
+
+        /* Table Styling */
+        table {
             width: 100%;
+            margin: 30px 0;
             border-collapse: collapse;
-            margin: 20px 0;
-            color: white;
+            border-radius: 10px;
+            overflow: hidden;
         }
-        .status-table th, .status-table td {
+
+        table, th, td {
+            border: 1px solid #444;
+        }
+
+        th, td {
             padding: 12px 15px;
             text-align: left;
+            background-color: #2b2b2b;
         }
-        .status-table th {
+
+        th {
             background-color: #f80000;
             color: white;
+            font-weight: bold;
         }
-        .status-table td {
-            background-color: #2B2B2B;
+
+        tr:nth-child(even) {
+            background-color: #242424;
         }
-        .status-table tr:nth-child(even) td {
+
+        tr:hover {
             background-color: #333;
         }
-        .status-table tr:hover td {
-            background-color: #444;
-        }
-        .status-indicator {
-            margin-right: 10px;
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .status-bar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
         }
     </style>
 </head>
@@ -109,34 +105,25 @@
     <div class="status-container">
         <h1>Cheat Status</h1>
         
-        <!-- Status Bar for Each Product -->
+        <!-- Status Bars -->
         <div class="status-bar green">
-            <div>
-                <span class="status-indicator"></span>
-                <span class="product-name">Fivem - Macho Chair</span>
-            </div>
-            <a href="https://peachesservices.com/product/macho-chair">Purchase</a>
+            <span>Fivem - Macho Chair</span>
+            <a href="https://injectkings.com/product/macho-chair">Purchase</a>
         </div>
 
         <div class="status-bar orange">
-            <div>
-                <span class="status-indicator"></span>
-                <span class="product-name">Fivem - Beta Chair</span>
-            </div>
-            <a href="https://peachesservices.com/product/beta-chair">Purchase</a>
+            <span>Fivem - Beta Chair</span>
+            <a href="https://injectkings.com/product/beta-chair">Purchase</a>
         </div>
 
         <div class="status-bar blue">
-            <div>
-                <span class="status-indicator"></span>
-                <span class="product-name">Fivem - Alpha Chair</span>
-            </div>
-            <a href="https://peachesservices.com/product/alpha-chair">Purchase</a>
+            <span>Fivem - Alpha Chair</span>
+            <a href="https://injectkings.com/product/alpha-chair">Purchase</a>
         </div>
 
-        <!-- Status Explanation Table -->
         <h2>Status Legend</h2>
-        <table class="status-table">
+        <!-- Status Legend Table -->
+        <table>
             <thead>
                 <tr>
                     <th>Status Color</th>
@@ -145,24 +132,24 @@
             </thead>
             <tbody>
                 <tr>
-                    <td style="background-color: #00ff00; color: black;">Green</td>
+                    <td style="background-color: #2ecc71;">Green</td>
                     <td>Operational</td>
                 </tr>
                 <tr>
-                    <td style="background-color: #ffa500; color: black;">Orange</td>
+                    <td style="background-color: #e67e22;">Orange</td>
                     <td>Use at own risk</td>
                 </tr>
                 <tr>
-                    <td style="background-color: #ffffff; color: black;">White</td>
+                    <td style="background-color: #f1c40f;">White</td>
                     <td>Testing</td>
                 </tr>
                 <tr>
-                    <td style="background-color: #0000ff; color: white;">Blue</td>
+                    <td style="background-color: #3498db;">Blue</td>
                     <td>Updating</td>
                 </tr>
                 <tr>
-                    <td style="background-color: #ff0000; color: white;">Red</td>
-                    <td>DTC - Do not use</td>
+                    <td style="background-color: #e74c3c;">Red</td>
+                    <td>DTC | Offline</td>
                 </tr>
             </tbody>
         </table>
