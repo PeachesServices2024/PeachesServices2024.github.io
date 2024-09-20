@@ -6,16 +6,7 @@
     <title>Enhanced Product Card</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 
-    <!-- Assuming you are hosting the PP Monument Extended font locally -->
     <style>
-        @font-face {
-            font-family: 'PP Monument Extended';
-            src: url('fonts/PPMonumentExtended.woff2') format('woff2'),
-                 url('fonts/PPMonumentExtended.woff') format('woff');
-            font-weight: normal;
-            font-style: normal;
-        }
-
         body {
             background-color: #121111;
             color: white;
@@ -32,7 +23,6 @@
 
         .header h1 {
             color: #f80000;
-            font-family: 'PP Monument Extended', sans-serif;
             font-size: 2.5rem;
             margin-bottom: 10px;
         }
@@ -64,88 +54,6 @@
             transform: translateY(-2px);
         }
 
-        /* Updated Product Card */
-        .product-card {
-            background-color: #2B2B2B;
-            padding: 20px;
-            border-radius: 15px;
-            margin: 20px auto;
-            width: 100%;
-            max-width: 400px;
-            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.6);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            overflow: hidden;
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.8);
-        }
-
-        .product-card img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-
-        .product-card:hover img {
-            transform: scale(1.05);
-        }
-
-        .product-details {
-            padding: 15px;
-            text-align: left;
-        }
-
-        .product-name {
-            font-size: 1.5rem;
-            font-family: 'PP Monument Extended', sans-serif;
-            color: #ffffff;
-            margin-bottom: 10px;
-        }
-
-        .product-description {
-            font-size: 1rem;
-            color: #ccc;
-            line-height: 1.5;
-            margin-bottom: 15px;
-        }
-
-        .product-price {
-            color: #f80000;
-            font-size: 1.3rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .product-availability {
-            color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-        }
-
-        .product-link {
-            display: inline-block;
-            padding: 12px 20px;
-            background-color: #f80000;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 1rem;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-
-        .product-link:hover {
-            background-color: #e00000;
-            transform: translateY(-2px);
-        }
-
-        .product-link i {
-            margin-left: 5px;
-        }
-
         /* Admin Login Styling */
         .admin-container {
             text-align: center;
@@ -171,7 +79,6 @@
             color: #fff;
             margin-top: 20px;
         }
-
     </style>
 </head>
 <body>
@@ -196,52 +103,40 @@
         <button class="dashboard-btn" id="dashboardBtn" style="display:none;">Admin Dashboard</button>
     </div>
 
-    <!-- Updated Product Card -->
-    <div class="product-card">
-        <div>
-            <img src="https://imagedelivery.net/HL_Fwm__tlvUGLZF2p74xw/7d02c379-eeff-47b4-ef9b-fbfc75fa2200/public" alt="Macho Fivem" />
-        </div>
-        <div class="product-details">
-            <h3 class="product-name">Macho Fivem</h3>
-            <p class="product-description">
-                Spoofer included with visuals, aimbot, and other features for enhanced gameplay.
-            </p>
-            <p class="product-price">$49.99</p>
-            <p class="product-availability">In Stock</p>
-            <a href="https://peachesservices.com/product/macho-fivem" class="product-link">
-                Buy Now <i class="fas fa-shopping-cart"></i>
-            </a>
-        </div>
-    </div>
-
     <script>
-        const loginBtn = document.getElementById('loginBtn');
-        const loggedInMessage = document.getElementById('loggedInMessage');
-        const dashboardBtn = document.getElementById('dashboardBtn');
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginBtn = document.getElementById('loginBtn');
+            const loggedInMessage = document.getElementById('loggedInMessage');
+            const dashboardBtn = document.getElementById('dashboardBtn');
 
-        let isLoggedIn = false; // This can later be tied to a real authentication system
-
-        loginBtn.addEventListener('click', () => {
-            const username = prompt('Enter Admin Username:');
-            const password = prompt('Enter Admin Password:');
-            
-            // Simple login logic - replace with actual authentication
-            if (username === 'PeachesServices2024' && password === 'PeachTerps1963@') {
-                isLoggedIn = true;
+            // Check if already logged in
+            const storedUsername = localStorage.getItem('username');
+            if (storedUsername) {
                 loginBtn.style.display = 'none';
                 loggedInMessage.style.display = 'block';
                 dashboardBtn.style.display = 'block';
-                loggedInMessage.innerText = 'Logged in as: ' + username;
-            } else {
-                alert('Invalid login details.');
+                loggedInMessage.innerText = 'Logged in as: ' + storedUsername;
             }
-        });
 
-        // Redirect to Admin Dashboard when the button is clicked
-        dashboardBtn.addEventListener('click', () => {
-            if (isLoggedIn) {
-                window.location.href = 'admin_dashboard.html'; // Change this to the actual dashboard URL
-            }
+            loginBtn.addEventListener('click', () => {
+                const username = prompt('Enter Admin Username:');
+                const password = prompt('Enter Admin Password:');
+                
+                if (username === 'PeachesServices2024' && password === 'PeachTerps1963@') {
+                    localStorage.setItem('username', username);
+                    loginBtn.style.display = 'none';
+                    loggedInMessage.style.display = 'block';
+                    dashboardBtn.style.display = 'block';
+                    loggedInMessage.innerText = 'Logged in as: ' + username;
+                } else {
+                    alert('Invalid login details.');
+                }
+            });
+
+            // Redirect to Admin Dashboard
+            dashboardBtn.addEventListener('click', () => {
+                window.location.href = 'admin_dashboard.html';
+            });
         });
     </script>
 
