@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Peaches Services</title>
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: white;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #f80000;
+        }
+
+        .admin-info {
+            text-align: right;
+            font-size: 1.2rem;
+        }
+
+        .admin-panel {
+            margin: 20px auto;
+            max-width: 800px;
+            padding: 20px;
+            background-color: #121212;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .admin-panel input, .admin-panel button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .admin-panel button {
+            background-color: #f80000;
+            color: white;
+            cursor: pointer;
+        }
+
+        .admin-panel button:hover {
+            background-color: #d80000;
+        }
+
+        .category-section, .product-section {
+            margin-top: 40px;
+        }
+
+        .products {
+            margin-top: 20px;
+        }
+
+        .product-item {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #2b2b2b;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .add-button {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-info">
+        Logged in as: <span id="adminUsername"></span>
+    </div>
+
+    <h1>Admin Dashboard</h1>
+
+    <div class="admin-panel">
+        <!-- User Management Section -->
+        <h2>Add New Admin User</h2>
+        <input type="text" id="newUsername" placeholder="New Username">
+        <input type="password" id="newPassword" placeholder="New Password">
+        <button onclick="addUser()">Add User</button>
+
+        <!-- Display Current Users -->
+        <h3>Existing Admin Users:</h3>
+        <ul id="userList"></ul>
+
+        <!-- Product and Category Management Section -->
+        <div class="category-section">
+            <h2>Add New Category</h2>
+            <input type="text" id="newCategory" placeholder="New Category Name">
+            <button onclick="addCategory()">Add Category</button>
+
+            <div id="categoriesContainer"></div>
+        </div>
+
+        <div class="product-section">
+            <h2>Add New Product to a Category</h2>
+            <select id="categorySelect"></select>
+            <input type="text" id="newProduct" placeholder="New Product Name">
+            <button onclick="addProduct()">Add Product</button>
+
+            <div class="products" id="productsContainer"></div>
+        </div>
+    </div>
+
+    <script>
+        // Predefined users object to store usernames and passwords
+        let users = {
+            'PeachesServices2024': 'PeachTerps1963@'
+        };
+
+        let categories = {}; // Categories and products
+
+        // Function to load the logged in username from URL params
+        function loadAdminUser() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const username = urlParams.get('user');
+            document.getElementById('adminUsername').textContent = username;
+        }
+
+        // Function to add a new user
+        function addUser() {
+            const newUsername = document.getElementById('newUsername').value;
+            const newPassword = document.getElementById('newPassword').value;
+
+            if (newUsername && newPassword) {
+                users[newUsername] = newPassword;
+                alert(`User ${newUsername} added successfully!`);
+                displayUsers();
+            } else {
+                alert('Please enter both username and password');
+            }
+        }
+
+        // Display list of existing users
+        function displayUsers() {
+            const userList = document.getElementById('userList');
+            userList.innerHTML = '';
+
+            for (const user in users) {
+                const li = document.createElement('li');
+                li.textContent = user;
+                userList.appendChild(li);
+            }
+        }
+
+        // Function to add a new category
+        function addCategory() {
+            const newCategory = document.getElementById('newCategory').value;
+
+            if (newCategory && !categories[newCategory]) {
+                categories[newCategory] = [];
+                alert(`Category ${newCategory} added successfully!`);
+                updateCategorySelect();
+            } else {
+                alert('Please enter a valid category name or the category already exists');
+            }
+        }
+
+        // Update the category dropdown for adding products
+        function updateCategorySelect() {
+            const categorySelect = document.getElementById('categorySelect');
+            categorySelect.innerHTML = '';
+
+            for (const category in categories) {
+                const option = document.createElement('option');
+                option.value = category;
+                option.textContent = category;
+                categorySelect.appendChild(option);
+            }
+        }
+
+        // Function to add a new product to a category
+        function addProduct() {
+            const selectedCategory = document.getElementById('categorySelect').value;
+            const newProduct = document.getElementById('newProduct').value;
+
+            if (selectedCategory && newProduct) {
+                categories[selectedCategory].push(newProduct);
+                alert(`Product ${newProduct} added to ${selectedCategory} successfully!`);
+                displayProducts();
+            } else {
+                alert('Please select a category and enter a product name');
+            }
+        }
+
+        // Display all products in categories
+        function displayProducts() {
+            const productsContainer = document.getElementById('productsContainer');
+            productsContainer.innerHTML = '';
+
+            for (const category in categories) {
+                const categoryDiv = document.createElement('div');
+                categoryDiv.innerHTML = `<h3>${category}</h3>`;
+                categories[category].forEach(product => {
+                    const productDiv = document.createElement('div');
+                    productDiv.classList.add('product-item');
+                    productDiv.textContent = product;
+                    categoryDiv.appendChild(productDiv);
+                });
+                productsContainer.appendChild(categoryDiv);
+            }
+        }
+
+        // Initialize
+        window.onload = function () {
+            loadAdminUser();
+            displayUsers();
+        };
+    </script>
+</body>
+</html>
