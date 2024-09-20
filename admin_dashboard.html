@@ -197,6 +197,7 @@
                     storedCategories[newCategory] = [];
                     localStorage.setItem('categories', JSON.stringify(storedCategories));
                     updateCategorySelect();
+                    displayProducts();
                     alert(`Category ${newCategory} added successfully!`);
                 } else {
                     alert('Please enter a valid category name or the category already exists.');
