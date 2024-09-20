@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Peaches Hub</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
-
     <style>
         body {
             background-color: #121111;
@@ -14,7 +13,6 @@
             padding: 20px;
         }
 
-        /* Centered Header and Buttons */
         .header {
             text-align: center;
             margin-top: 100px;
@@ -54,7 +52,6 @@
             transform: translateY(-2px);
         }
 
-        /* Updated Product Card */
         .product-card {
             background-color: #2B2B2B;
             padding: 20px;
@@ -131,7 +128,6 @@
             transform: translateY(-2px);
         }
 
-        /* Admin Login Styling */
         .admin-container {
             text-align: center;
             margin-top: 20px;
@@ -173,24 +169,6 @@
         </div>
     </div>
 
-    <!-- Product Card Section -->
-    <div class="product-card">
-        <div>
-            <img src="https://imagedelivery.net/HL_Fwm__tlvUGLZF2p74xw/7d02c379-eeff-47b4-ef9b-fbfc75fa2200/public" alt="Macho Fivem" />
-        </div>
-        <div class="product-details">
-            <h3 class="product-name">Macho Fivem</h3>
-            <p class="product-description">
-                Spoofer included with visuals, aimbot, and other features for enhanced gameplay.
-            </p>
-            <p class="product-price">$49.99</p>
-            <p class="product-availability">In Stock</p>
-            <a href="https://peachesservices.com/product/macho-fivem" class="product-link">
-                Buy Now <i class="fas fa-shopping-cart"></i>
-            </a>
-        </div>
-    </div>
-
     <!-- Admin Section -->
     <div class="admin-container">
         <button class="login-btn" id="loginBtn">Admin Login</button>
@@ -205,27 +183,38 @@
             const dashboardBtn = document.getElementById('dashboardBtn');
 
             // Check if already logged in
-            const storedUsername = localStorage.getItem('username');
-            if (storedUsername) {
-                loginBtn.style.display = 'none';
-                loggedInMessage.style.display = 'block';
-                dashboardBtn.style.display = 'block';
-                loggedInMessage.innerText = 'Logged in as: ' + storedUsername;
-            }
+            fetch('/api/auth/status', { credentials: 'include' })
+            .then(response => response.json())
+            .then(data => {
+                if (data.isLoggedIn) {
+                    loginBtn.style.display = 'none';
+                    loggedInMessage.style.display = 'block';
+                    dashboardBtn.style.display = 'block';
+                    loggedInMessage.innerText = 'Logged in as: ' + data.username;
+                }
+            });
 
             loginBtn.addEventListener('click', () => {
                 const username = prompt('Enter Admin Username:');
                 const password = prompt('Enter Admin Password:');
                 
-                if (username === 'PeachesServices2024' && password === 'PeachTerps1963@') {
-                    localStorage.setItem('username', username);
-                    loginBtn.style.display = 'none';
-                    loggedInMessage.style.display = 'block';
-                    dashboardBtn.style.display = 'block';
-                    loggedInMessage.innerText = 'Logged in as: ' + username;
-                } else {
-                    alert('Invalid login details.');
-                }
+                fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password }),
+                    credentials: 'include'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        loginBtn.style.display = 'none';
+                        loggedInMessage.style.display = 'block';
+                        dashboardBtn.style.display = 'block';
+                        loggedInMessage.innerText = 'Logged in as: ' + username;
+                    } else {
+                        alert('Invalid login details.');
+                    }
+                });
             });
 
             // Redirect to Admin Dashboard
