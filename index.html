@@ -10,7 +10,17 @@
     <meta name="twitter:title" content="Macho Fivem - PeachesServices">
     <meta name="twitter:description" content="[SPOOFER INCLUDED][...] Full Color Selection">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+    <!-- Assuming you are hosting the PP Monument Extended font locally -->
     <style>
+        @font-face {
+            font-family: 'PP Monument Extended';
+            src: url('fonts/PPMonumentExtended.woff2') format('woff2'), /* Make sure to change the path to your font file */
+                 url('fonts/PPMonumentExtended.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         body {
             background-color: #121111;
             color: white;
@@ -21,21 +31,34 @@
         /* Red bar at the top */
         .top_bar {
             width: 100%;
-            height: 50px;
+            height: 60px;
             background-color: #f80000;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+        }
+
+        .announcement_wrapper {
             position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .announcement_text {
+            font-family: 'PP Monument Extended', sans-serif;
             font-size: 1.2rem;
             color: white;
             white-space: nowrap;
             position: absolute;
-            animation: slide_in_out 20s linear infinite;
+            animation: slide_in_out 10s linear infinite;
         }
 
         /* Animation for text sliding in and out */
@@ -62,9 +85,16 @@
             }
         }
 
+        /* Announcement Container */
+        .announcements {
+            position: relative;
+            width: 100%;
+        }
+
         /* Centered Title and Buttons */
         .header {
             text-align: center;
+            margin-top: 100px;
             margin-bottom: 40px;
         }
 
@@ -163,12 +193,16 @@
     </style>
 </head>
 <body>
-    <!-- Red bar at the top with announcements -->
+    <!-- Red bar at the top with separate announcements -->
     <div class="top_bar">
-        <div class="announcement_text">
-            Website being worked on. | Any question contact me on Discord.gg/PeachesServices |
-            Products on website www.PeachesServices.com | Will be updated for product status shortly |
-            Any suggestions please let me know.
+        <div class="announcement_wrapper">
+            <div class="announcements">
+                <div class="announcement_text">Website being worked on.</div>
+                <div class="announcement_text" style="animation-delay: 10s;">Any question contact me on Discord.gg/PeachesServices</div>
+                <div class="announcement_text" style="animation-delay: 20s;">Products on website www.PeachesServices.com</div>
+                <div class="announcement_text" style="animation-delay: 30s;">Will be updated for product status shortly</div>
+                <div class="announcement_text" style="animation-delay: 40s;">Any suggestions please let me know.</div>
+            </div>
         </div>
     </div>
 
