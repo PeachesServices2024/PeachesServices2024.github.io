@@ -227,9 +227,12 @@
             loginBtn.addEventListener('click', () => {
                 const username = prompt('Enter Admin Username:');
                 const password = prompt('Enter Admin Password:');
-                
+
+                // Check credentials (In real-world applications, this should be done on the server)
                 if (username === 'PeachesServices2024' && password === 'PeachTerps1963@') {
                     localStorage.setItem('username', username);
+
+                    // Hide the login button and show the dashboard link
                     loginBtn.style.display = 'none';
                     loggedInMessage.style.display = 'block';
                     dashboardBtn.style.display = 'block';
