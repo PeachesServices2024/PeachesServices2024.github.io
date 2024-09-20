@@ -39,147 +39,12 @@
             font-size: 1.2rem;
         }
 
-        .status-bar a {
-            padding: 8px 15px;
-            background-color: #f80000;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-        .status-bar a:hover {
-            background-color: #d80000;
-        }
-
-        /* Status Color Bars */
+        /* Status Colors */
         .green { background-color: #2ecc71; }
         .orange { background-color: #e67e22; }
         .yellow { background-color: #f1c40f; }
         .blue { background-color: #3498db; }
         .red { background-color: #e74c3c; }
-
-        /* Navigation Buttons */
-        .nav-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
-        .nav-buttons a {
-            padding: 10px 20px;
-            background-color: #f80000;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 1rem;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-
-        .nav-buttons a:hover {
-            background-color: #d80000;
-            transform: translateY(-2px);
-        }
-
-        /* Login Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 9999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.8);
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background-color: #333;
-            padding: 20px;
-            border-radius: 10px;
-            width: 300px;
-            text-align: center;
-        }
-
-        .modal-content input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: none;
-            border-radius: 5px;
-        }
-
-        .modal-content button {
-            padding: 10px 20px;
-            background-color: #f80000;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .modal-content button:hover {
-            background-color: #d80000;
-        }
-
-        .login-btn {
-            padding: 10px 20px;
-            background-color: #f80000;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 20px 0;
-        }
-
-        .login-btn:hover {
-            background-color: #d80000;
-        }
-
-        /* Table Styling */
-        table {
-            width: 100%;
-            margin: 30px 0;
-            border-collapse: collapse;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        table, th, td {
-            border: 1px solid #444;
-        }
-
-        th, td {
-            padding: 12px 15px;
-            text-align: left;
-            background-color: #2b2b2b;
-        }
-
-        th {
-            background-color: #f80000;
-            color: white;
-            font-weight: bold;
-        }
-
-        tr:nth-child(even) {
-            background-color: #242424;
-        }
-
-        tr:hover {
-            background-color: #333;
-        }
-
-        /* Responsive Adjustments */
-        @media (max-width: 768px) {
-            .status-bar {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-        }
     </style>
 </head>
 <body>
@@ -191,27 +56,9 @@
         <a href="https://peachesservices.com">Products</a>
     </div>
 
-    <!-- Admin Login Button -->
-    <button class="login-btn" id="loginBtn">Admin Login</button>
-
-    <!-- Login Modal -->
-    <div id="loginModal" class="modal">
-        <div class="modal-content">
-            <h2>Admin Login</h2>
-            <input type="text" id="username" placeholder="Username">
-            <input type="password" id="password" placeholder="Password">
-            <button onclick="login()">Login</button>
-        </div>
-    </div>
-
     <div class="status-container">
         <h1>Cheat Status</h1>
-        
-        <!-- Status Bars -->
-        <div class="status-bar green" id="product1">
-            <span>Fivem - Macho Chair</span>
-            <a href="https://peachesservices.com/product/macho-fivem">Purchase</a>
-        </div>
+        <div id="statusBars"></div>
 
         <h2>Status Legend</h2>
         <!-- Status Legend Table -->
@@ -223,76 +70,31 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td style="background-color: #2ecc71;">Green</td>
-                    <td>Operational</td>
-                </tr>
-                <tr>
-                    <td style="background-color: #e67e22;">Orange</td>
-                    <td>Use at own risk</td>
-                </tr>
-                <tr>
-                    <td style="background-color: #f1c40f;">Yellow</td>
-                    <td>Testing</td>
-                </tr>
-                <tr>
-                    <td style="background-color: #3498db;">Blue</td>
-                    <td>Updating</td>
-                </tr>
-                <tr>
-                    <td style="background-color: #e74c3c;">Red</td>
-                    <td>DTC | Offline</td>
-                </tr>
+                <tr><td style="background-color: #2ecc71;">Green</td><td>Operational</td></tr>
+                <tr><td style="background-color: #e67e22;">Orange</td><td>Use at own risk</td></tr>
+                <tr><td style="background-color: #f1c40f;">Yellow</td><td>Testing</td></tr>
+                <tr><td style="background-color: #3498db;">Blue</td><td>Updating</td></tr>
+                <tr><td style="background-color: #e74c3c;">Red</td><td>DTC | Offline</td></tr>
             </tbody>
         </table>
     </div>
 
     <script>
-        const loginBtn = document.getElementById('loginBtn');
-        const loginModal = document.getElementById('loginModal');
-        const product1 = document.getElementById('product1');
-        let isLoggedIn = false;
+        document.addEventListener('DOMContentLoaded', () => {
+            const storedCategories = JSON.parse(localStorage.getItem('categories')) || {};
 
-        // Open login modal
-        loginBtn.addEventListener('click', () => {
-            loginModal.style.display = 'flex';
+            const statusBars = document.getElementById('statusBars');
+            for (const category in storedCategories) {
+                const products = storedCategories[category];
+                products.forEach(product => {
+                    const productBar = document.createElement('div');
+                    productBar.classList.add('status-bar', 'green'); // Default to green
+                    productBar.innerHTML = `<span>${category} - ${product}</span>`;
+                    statusBars.appendChild(productBar);
+                });
+            }
         });
-
-        // Admin login function
-        function login() {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-
-            if (username === 'PeachesServices2024' && password === 'PeachTerps1963@') {
-                alert('Login successful!');
-                isLoggedIn = true;
-                loginModal.style.display = 'none';
-                enableStatusToggle(product1); // Enable status toggle
-            } else {
-                alert('Incorrect username or password');
-            }
-        }
-
-        // Function to toggle product status
-        function enableStatusToggle(product) {
-            product.addEventListener('click', () => {
-                if (isLoggedIn) {
-                    const currentClass = product.classList[1];
-                    const classes = ['green', 'orange', 'yellow', 'blue', 'red'];
-                    const currentIndex = classes.indexOf(currentClass);
-                    const nextIndex = (currentIndex + 1) % classes.length;
-                    product.classList.remove(currentClass);
-                    product.classList.add(classes[nextIndex]);
-                }
-            });
-        }
-
-        // Close modal when clicking outside of it
-        window.onclick = function(event) {
-            if (event.target == loginModal) {
-                loginModal.style.display = 'none';
-            }
-        }
     </script>
+
 </body>
 </html>
