@@ -149,20 +149,21 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const storedCategories = JSON.parse(localStorage.getItem('categories')) || {};
-            const statusBars = document.getElementById('statusBars');
-
-            for (const category in storedCategories) {
-                const products = storedCategories[category];
-                products.forEach(product => {
-                    const productBar = document.createElement('div');
-                    productBar.classList.add('status-bar', product.status);
-                    productBar.innerHTML = `
-                        <span>${category} - ${product.name}</span>
-                        <a href="https://peachesservices.com/product/${product.name.replace(/\s+/g, '-').toLowerCase()}">Purchase</a>`;
-                    statusBars.appendChild(productBar);
+            fetch('/api/categories')
+            .then(response => response.json())
+            .then(data => {
+                const statusBars = document.getElementById('statusBars');
+                data.categories.forEach(category => {
+                    category.products.forEach(product => {
+                        const productBar = document.createElement('div');
+                        productBar.classList.add('status-bar', product.status);
+                        productBar.innerHTML = `
+                            <span>${category.name} - ${product.name}</span>
+                            <a href="https://peachesservices.com/product/${product.name.replace(/\s+/g, '-').toLowerCase()}">Purchase</a>`;
+                        statusBars.appendChild(productBar);
+                    });
                 });
-            }
+            });
         });
     </script>
 
