@@ -3,57 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cheat Status - InjectKings</title>
+    <title>Cheat Status - Peaches Services</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <!-- Modern Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
     <style>
+        /* Global Styles */
         body {
             background-color: #1a1a1a;
             color: white;
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
             padding: 20px;
         }
 
         h1, h2 {
             text-align: center;
             color: #f80000;
+            font-weight: 600;
+            margin-bottom: 20px;
         }
 
         .status-container {
             max-width: 1000px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 30px;
             background-color: #121212;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.5);
         }
 
+        /* Status Bars */
         .status-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 20px;
+            padding: 15px 25px;
             margin: 15px 0;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-            font-weight: bold;
-            font-size: 1.2rem;
+            border-radius: 10px;
+            background-color: #333;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+
+        .status-bar:hover {
+            background-color: #444;
+            transform: translateY(-3px);
         }
 
         .status-bar a {
-            padding: 8px 15px;
+            padding: 10px 20px;
             background-color: #f80000;
             color: white;
             text-decoration: none;
             border-radius: 5px;
-            transition: background-color 0.3s ease;
+            font-size: 1rem;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         .status-bar a:hover {
-            background-color: #d80000;
+            background-color: #e00000;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
         }
 
         /* Status Color Bars */
-        .green { background-color: #2ecc71; }
+        .green { background-color: #27ae60; }
         .orange { background-color: #e67e22; }
         .white { background-color: #f1c40f; }
         .blue { background-color: #3498db; }
@@ -66,22 +84,24 @@
             border-collapse: collapse;
             border-radius: 10px;
             overflow: hidden;
+            box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.4);
         }
 
         table, th, td {
-            border: 1px solid #444;
+            border: none;
         }
 
         th, td {
-            padding: 12px 15px;
+            padding: 15px 20px;
             text-align: left;
             background-color: #2b2b2b;
+            font-size: 1rem;
         }
 
         th {
             background-color: #f80000;
             color: white;
-            font-weight: bold;
+            font-weight: 600;
         }
 
         tr:nth-child(even) {
@@ -97,6 +117,15 @@
             .status-bar {
                 flex-direction: column;
                 align-items: flex-start;
+                padding: 10px;
+            }
+
+            .status-bar a {
+                margin-top: 10px;
+            }
+
+            th, td {
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -122,7 +151,7 @@
             </thead>
             <tbody>
                 <tr>
-                    <td style="background-color: #2ecc71;">Green</td>
+                    <td style="background-color: #27ae60;">Green</td>
                     <td>Operational</td>
                 </tr>
                 <tr>
