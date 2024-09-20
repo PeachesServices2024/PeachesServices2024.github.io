@@ -48,28 +48,6 @@
         .admin-panel button:hover {
             background-color: #d80000;
         }
-
-        .category-section, .product-section {
-            margin-top: 40px;
-        }
-
-        .products {
-            margin-top: 20px;
-        }
-
-        .product-item {
-            margin: 10px 0;
-            padding: 10px;
-            background-color: #2b2b2b;
-            border-radius: 5px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .add-button {
-            margin: 10px 0;
-        }
     </style>
 </head>
 <body>
@@ -80,139 +58,74 @@
     <h1>Admin Dashboard</h1>
 
     <div class="admin-panel">
-        <!-- User Management Section -->
-        <h2>Add New Admin User</h2>
-        <input type="text" id="newUsername" placeholder="New Username">
-        <input type="password" id="newPassword" placeholder="New Password">
-        <button onclick="addUser()">Add User</button>
+        <h2>Add New Category</h2>
+        <input type="text" id="newCategory" placeholder="New Category Name">
+        <button onclick="addCategory()">Add Category</button>
 
-        <!-- Display Current Users -->
-        <h3>Existing Admin Users:</h3>
-        <ul id="userList"></ul>
+        <h2>Add New Product</h2>
+        <select id="categorySelect"></select>
+        <input type="text" id="newProduct" placeholder="New Product Name">
+        <button onclick="addProduct()">Add Product</button>
 
-        <!-- Product and Category Management Section -->
-        <div class="category-section">
-            <h2>Add New Category</h2>
-            <input type="text" id="newCategory" placeholder="New Category Name">
-            <button onclick="addCategory()">Add Category</button>
-
-            <div id="categoriesContainer"></div>
-        </div>
-
-        <div class="product-section">
-            <h2>Add New Product to a Category</h2>
-            <select id="categorySelect"></select>
-            <input type="text" id="newProduct" placeholder="New Product Name">
-            <button onclick="addProduct()">Add Product</button>
-
-            <div class="products" id="productsContainer"></div>
-        </div>
+        <h3>Products in Categories</h3>
+        <div id="productsContainer"></div>
     </div>
 
     <script>
-        // Predefined users object to store usernames and passwords
-        let users = {
-            'PeachesServices2024': 'PeachTerps1963@'
-        };
+        document.addEventListener('DOMContentLoaded', () => {
+            const storedCategories = JSON.parse(localStorage.getItem('categories')) || {};
 
-        let categories = {}; // Categories and products
-
-        // Function to load the logged in username from URL params
-        function loadAdminUser() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const username = urlParams.get('user');
-            document.getElementById('adminUsername').textContent = username;
-        }
-
-        // Function to add a new user
-        function addUser() {
-            const newUsername = document.getElementById('newUsername').value;
-            const newPassword = document.getElementById('newPassword').value;
-
-            if (newUsername && newPassword) {
-                users[newUsername] = newPassword;
-                alert(`User ${newUsername} added successfully!`);
-                displayUsers();
-            } else {
-                alert('Please enter both username and password');
-            }
-        }
-
-        // Display list of existing users
-        function displayUsers() {
-            const userList = document.getElementById('userList');
-            userList.innerHTML = '';
-
-            for (const user in users) {
-                const li = document.createElement('li');
-                li.textContent = user;
-                userList.appendChild(li);
-            }
-        }
-
-        // Function to add a new category
-        function addCategory() {
-            const newCategory = document.getElementById('newCategory').value;
-
-            if (newCategory && !categories[newCategory]) {
-                categories[newCategory] = [];
-                alert(`Category ${newCategory} added successfully!`);
-                updateCategorySelect();
-            } else {
-                alert('Please enter a valid category name or the category already exists');
-            }
-        }
-
-        // Update the category dropdown for adding products
-        function updateCategorySelect() {
             const categorySelect = document.getElementById('categorySelect');
-            categorySelect.innerHTML = '';
-
-            for (const category in categories) {
-                const option = document.createElement('option');
-                option.value = category;
-                option.textContent = category;
-                categorySelect.appendChild(option);
-            }
-        }
-
-        // Function to add a new product to a category
-        function addProduct() {
-            const selectedCategory = document.getElementById('categorySelect').value;
-            const newProduct = document.getElementById('newProduct').value;
-
-            if (selectedCategory && newProduct) {
-                categories[selectedCategory].push(newProduct);
-                alert(`Product ${newProduct} added to ${selectedCategory} successfully!`);
-                displayProducts();
-            } else {
-                alert('Please select a category and enter a product name');
-            }
-        }
-
-        // Display all products in categories
-        function displayProducts() {
             const productsContainer = document.getElementById('productsContainer');
-            productsContainer.innerHTML = '';
 
-            for (const category in categories) {
-                const categoryDiv = document.createElement('div');
-                categoryDiv.innerHTML = `<h3>${category}</h3>`;
-                categories[category].forEach(product => {
-                    const productDiv = document.createElement('div');
-                    productDiv.classList.add('product-item');
-                    productDiv.textContent = product;
-                    categoryDiv.appendChild(productDiv);
-                });
-                productsContainer.appendChild(categoryDiv);
+            function updateCategorySelect() {
+                categorySelect.innerHTML = '';
+                for (const category in storedCategories) {
+                    const option = document.createElement('option');
+                    option.value = category;
+                    option.textContent = category;
+                    categorySelect.appendChild(option);
+                }
             }
-        }
 
-        // Initialize
-        window.onload = function () {
-            loadAdminUser();
-            displayUsers();
-        };
+            function displayProducts() {
+                productsContainer.innerHTML = '';
+                for (const category in storedCategories) {
+                    const categoryDiv = document.createElement('div');
+                    categoryDiv.innerHTML = `<h4>${category}</h4>`;
+                    storedCategories[category].forEach(product => {
+                        const productDiv = document.createElement('div');
+                        productDiv.textContent = product;
+                        categoryDiv.appendChild(productDiv);
+                    });
+                    productsContainer.appendChild(categoryDiv);
+                }
+            }
+
+            window.addCategory = function() {
+                const newCategory = document.getElementById('newCategory').value;
+                if (newCategory && !storedCategories[newCategory]) {
+                    storedCategories[newCategory] = [];
+                    localStorage.setItem('categories', JSON.stringify(storedCategories));
+                    updateCategorySelect();
+                    alert(`Category ${newCategory} added successfully!`);
+                }
+            };
+
+            window.addProduct = function() {
+                const selectedCategory = categorySelect.value;
+                const newProduct = document.getElementById('newProduct').value;
+                if (selectedCategory && newProduct) {
+                    storedCategories[selectedCategory].push(newProduct);
+                    localStorage.setItem('categories', JSON.stringify(storedCategories));
+                    displayProducts();
+                    alert(`Product ${newProduct} added to ${selectedCategory}!`);
+                }
+            };
+
+            updateCategorySelect();
+            displayProducts();
+        });
     </script>
 </body>
 </html>
