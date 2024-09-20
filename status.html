@@ -3,122 +3,166 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cheat Status Page</title>
+    <title>Cheat Status - Peaches Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #1a1a1a;
+            background-color: #121111;
             color: white;
-            text-align: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
         }
         h1 {
-            margin-top: 20px;
-            font-size: 36px;
+            text-align: center;
+            font-size: 2.5rem;
             font-weight: bold;
+            margin-bottom: 20px;
         }
-        h2 {
-            font-size: 28px;
-            margin-bottom: 10px;
+        .status-container {
+            max-width: 800px;
+            margin: 0 auto;
         }
-        .status-box {
-            display: inline-block;
-            width: 80%;
+        .status-bar {
+            position: relative;
+            background-color: #2B2B2B;
+            border-radius: 5px;
             padding: 15px;
             margin: 20px 0;
-            border-radius: 10px;
-            font-size: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease-in-out;
+        }
+        .status-bar .product-name {
+            font-size: 1.2rem;
             font-weight: bold;
-            position: relative;
-            animation: glow 2s infinite alternate;
         }
-        .status-box.green { background-color: #28a745; } /* Operational */
-        .status-box.orange { background-color: #ffcc00; } /* Use at own risk */
-        .status-box.white { background-color: #f0f0f0; color: black; } /* Testing */
-        .status-box.blue { background-color: #007bff; } /* Updating */
-        .status-box.red { background-color: #dc3545; } /* DTC - Do not use */
-        .status-box button {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
+        .status-bar .status-indicator {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: all 0.3s ease-in-out;
+        }
+        .status-bar.green .status-indicator {
+            background-color: #00ff00;
+            box-shadow: 0px 0px 15px 5px rgba(0, 255, 0, 0.6);
+        }
+        .status-bar.orange .status-indicator {
+            background-color: #ffa500;
+            box-shadow: 0px 0px 15px 5px rgba(255, 165, 0, 0.6);
+        }
+        .status-bar.white .status-indicator {
             background-color: #ffffff;
-            color: #000000;
+            box-shadow: 0px 0px 15px 5px rgba(255, 255, 255, 0.6);
+        }
+        .status-bar.blue .status-indicator {
+            background-color: #0000ff;
+            box-shadow: 0px 0px 15px 5px rgba(0, 0, 255, 0.6);
+        }
+        .status-bar.red .status-indicator {
+            background-color: #ff0000;
+            box-shadow: 0px 0px 15px 5px rgba(255, 0, 0, 0.6);
+        }
+        .status-bar a {
             padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+            background-color: #f80000;
+            color: white;
             text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out;
         }
-        .status-box button:hover {
-            background-color: #f0f0f0;
+        .status-bar a:hover {
+            background-color: #e00000;
         }
-
-        /* Glow effect */
-        @keyframes glow {
-            from { box-shadow: 0 0 10px #fff; }
-            to { box-shadow: 0 0 20px #fff; }
-        }
-
-        /* Table for status meanings */
-        table {
-            margin: 20px auto;
-            width: 80%;
+        .status-table {
+            width: 100%;
             border-collapse: collapse;
+            margin: 20px 0;
         }
-        table, th, td {
-            border: 1px solid white;
+        .status-table th, .status-table td {
+            padding: 12px 15px;
+            text-align: left;
         }
-        th, td {
-            padding: 15px;
-            text-align: center;
+        .status-table th {
+            background-color: #f80000;
+            color: white;
         }
-        th {
+        .status-table td {
+            background-color: #2B2B2B;
+            color: white;
+        }
+        .status-table tr:nth-child(even) td {
             background-color: #333;
         }
-        td {
+        .status-table tr:hover td {
             background-color: #444;
         }
     </style>
 </head>
 <body>
+    <div class="status-container">
+        <h1>Cheat Status</h1>
+        
+        <!-- Status Bar for Each Product -->
+        <div class="status-bar green">
+            <div>
+                <span class="status-indicator"></span>
+                <span class="product-name">Fivem - Macho Chair</span>
+            </div>
+            <a href="https://peachesservices.com/product/macho-chair">Purchase</a>
+        </div>
 
-    <h1>Cheat Status</h1>
+        <div class="status-bar orange">
+            <div>
+                <span class="status-indicator"></span>
+                <span class="product-name">Fivem - Beta Chair</span>
+            </div>
+            <a href="https://peachesservices.com/product/beta-chair">Purchase</a>
+        </div>
 
-    <!-- Example Game and Cheat Name -->
-    <h2>Fivem</h2>
-    <div class="status-box green">
-        Macho Chair
-        <button onclick="window.location.href='https://sellauth-link-to-macho-chair.com';">Purchase</button>
+        <div class="status-bar blue">
+            <div>
+                <span class="status-indicator"></span>
+                <span class="product-name">Fivem - Alpha Chair</span>
+            </div>
+            <a href="https://peachesservices.com/product/alpha-chair">Purchase</a>
+        </div>
+
+        <!-- Status Explanation Table -->
+        <h2>Status Legend</h2>
+        <table class="status-table">
+            <thead>
+                <tr>
+                    <th>Status Color</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="background-color: #00ff00; color: black;">Green</td>
+                    <td>Operational</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #ffa500; color: black;">Orange</td>
+                    <td>Use at own risk</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #ffffff; color: black;">White</td>
+                    <td>Testing</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #0000ff; color: white;">Blue</td>
+                    <td>Updating</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #ff0000; color: white;">Red</td>
+                    <td>DTC - Do not use</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-
-    <!-- Table for Status Explanation -->
-    <h2>Status Colors Explanation</h2>
-    <table>
-        <tr>
-            <th>Color</th>
-            <th>Status</th>
-        </tr>
-        <tr>
-            <td style="background-color: #28a745;">Green</td>
-            <td>Operational</td>
-        </tr>
-        <tr>
-            <td style="background-color: #ffcc00;">Orange</td>
-            <td>Use at own risk</td>
-        </tr>
-        <tr>
-            <td style="background-color: #f0f0f0; color: black;">White</td>
-            <td>Testing</td>
-        </tr>
-        <tr>
-            <td style="background-color: #007bff;">Blue</td>
-            <td>Updating</td>
-        </tr>
-        <tr>
-            <td style="background-color: #dc3545;">Red</td>
-            <td>DTC - Do not use</td>
-        </tr>
-    </table>
-
 </body>
 </html>
