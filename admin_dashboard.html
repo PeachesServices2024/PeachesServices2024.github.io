@@ -49,34 +49,30 @@
             background-color: #d80000;
         }
 
-        .user-list {
-            margin-top: 20px;
-        }
-
-        .user-list ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .user-list li {
+        .product-item {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             padding: 10px;
             background-color: #2b2b2b;
             margin: 5px 0;
             border-radius: 5px;
         }
 
-        .user-list button {
+        .product-item select, .product-item button {
+            margin-left: 10px;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .product-item button {
             background-color: #e74c3c;
             color: white;
             border: none;
-            border-radius: 5px;
             cursor: pointer;
-            padding: 5px 10px;
         }
 
-        .user-list button:hover {
+        .product-item button:hover {
             background-color: #c0392b;
         }
     </style>
@@ -89,17 +85,6 @@
     <h1>Admin Dashboard</h1>
 
     <div class="admin-panel">
-        <!-- User Management Section -->
-        <h2>Add New Admin User</h2>
-        <input type="text" id="newAdminUsername" placeholder="New Admin Username">
-        <input type="password" id="newAdminPassword" placeholder="New Admin Password">
-        <button onclick="addAdminUser()">Add Admin User</button>
-
-        <div class="user-list">
-            <h3>Existing Admin Users</h3>
-            <ul id="adminUserList"></ul>
-        </div>
-
         <!-- Category and Product Management -->
         <h2>Add New Category</h2>
         <input type="text" id="newCategory" placeholder="New Category Name">
@@ -110,26 +95,17 @@
         <input type="text" id="newProduct" placeholder="New Product Name">
         <button onclick="addProduct()">Add Product</button>
 
-        <h3>Products in Categories</h3>
+        <h3>Manage Products and Categories</h3>
         <div id="productsContainer"></div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const storedCategories = JSON.parse(localStorage.getItem('categories')) || {};
-            const storedAdminUsers = JSON.parse(localStorage.getItem('adminUsers')) || {'PeachesServices2024': 'PeachTerps1963@'};
-
             const categorySelect = document.getElementById('categorySelect');
             const productsContainer = document.getElementById('productsContainer');
-            const adminUserList = document.getElementById('adminUserList');
+            const statusOptions = ['green', 'orange', 'yellow', 'blue', 'red'];
 
-            // Display logged in admin username
-            const loggedInAdmin = localStorage.getItem('username');
-            if (loggedInAdmin) {
-                document.getElementById('adminUsername').textContent = loggedInAdmin;
-            }
-
-            // Update Category Dropdown
             function updateCategorySelect() {
                 categorySelect.innerHTML = '';
                 for (const category in storedCategories) {
@@ -140,57 +116,30 @@
                 }
             }
 
-            // Display products by category
             function displayProducts() {
                 productsContainer.innerHTML = '';
                 for (const category in storedCategories) {
                     const categoryDiv = document.createElement('div');
-                    categoryDiv.innerHTML = `<h4>${category}</h4>`;
+                    categoryDiv.innerHTML = `<h4>${category} <button onclick="removeCategory('${category}')">Delete Category</button></h4>`;
+
                     storedCategories[category].forEach(product => {
-                        const productDiv = document.createElement('div');
-                        productDiv.textContent = product;
-                        categoryDiv.appendChild(productDiv);
+                        const productItem = document.createElement('div');
+                        productItem.classList.add('product-item');
+                        productItem.innerHTML = `
+                            ${product.name}
+                            <select onchange="changeProductStatus('${category}', '${product.name}', this.value)">
+                                ${statusOptions.map(status => `
+                                    <option value="${status}" ${product.status === status ? 'selected' : ''}>${status}</option>
+                                `).join('')}
+                            </select>
+                            <button onclick="removeProduct('${category}', '${product.name}')">Delete</button>
+                        `;
+                        categoryDiv.appendChild(productItem);
                     });
                     productsContainer.appendChild(categoryDiv);
                 }
             }
 
-            // Add new admin user
-            window.addAdminUser = function() {
-                const newAdminUsername = document.getElementById('newAdminUsername').value;
-                const newAdminPassword = document.getElementById('newAdminPassword').value;
-
-                if (newAdminUsername && newAdminPassword && !storedAdminUsers[newAdminUsername]) {
-                    storedAdminUsers[newAdminUsername] = newAdminPassword;
-                    localStorage.setItem('adminUsers', JSON.stringify(storedAdminUsers));
-                    alert(`Admin user ${newAdminUsername} added successfully!`);
-                    displayAdminUsers();
-                } else {
-                    alert('Please enter a valid username and password, or the user already exists.');
-                }
-            };
-
-            // Remove admin user
-            window.removeAdminUser = function(username) {
-                if (storedAdminUsers[username]) {
-                    delete storedAdminUsers[username];
-                    localStorage.setItem('adminUsers', JSON.stringify(storedAdminUsers));
-                    alert(`Admin user ${username} removed.`);
-                    displayAdminUsers();
-                }
-            };
-
-            // Display list of admin users
-            function displayAdminUsers() {
-                adminUserList.innerHTML = '';
-                for (const user in storedAdminUsers) {
-                    const li = document.createElement('li');
-                    li.innerHTML = `${user} <button onclick="removeAdminUser('${user}')">Remove</button>`;
-                    adminUserList.appendChild(li);
-                }
-            }
-
-            // Add new category
             window.addCategory = function() {
                 const newCategory = document.getElementById('newCategory').value;
                 if (newCategory && !storedCategories[newCategory]) {
@@ -204,12 +153,11 @@
                 }
             };
 
-            // Add new product to category
             window.addProduct = function() {
                 const selectedCategory = categorySelect.value;
                 const newProduct = document.getElementById('newProduct').value;
                 if (selectedCategory && newProduct) {
-                    storedCategories[selectedCategory].push(newProduct);
+                    storedCategories[selectedCategory].push({ name: newProduct, status: 'green' });
                     localStorage.setItem('categories', JSON.stringify(storedCategories));
                     displayProducts();
                     alert(`Product ${newProduct} added to ${selectedCategory}!`);
@@ -218,10 +166,33 @@
                 }
             };
 
-            // Initialize the dashboard
+            window.removeCategory = function(category) {
+                delete storedCategories[category];
+                localStorage.setItem('categories', JSON.stringify(storedCategories));
+                updateCategorySelect();
+                displayProducts();
+                alert(`Category ${category} removed!`);
+            };
+
+            window.removeProduct = function(category, productName) {
+                storedCategories[category] = storedCategories[category].filter(product => product.name !== productName);
+                localStorage.setItem('categories', JSON.stringify(storedCategories));
+                displayProducts();
+                alert(`Product ${productName} removed from ${category}!`);
+            };
+
+            window.changeProductStatus = function(category, productName, newStatus) {
+                const product = storedCategories[category].find(p => p.name === productName);
+                if (product) {
+                    product.status = newStatus;
+                    localStorage.setItem('categories', JSON.stringify(storedCategories));
+                    alert(`Status of ${productName} changed to ${newStatus}!`);
+                }
+            };
+
+            // Initialize
             updateCategorySelect();
             displayProducts();
-            displayAdminUsers();
         });
     </script>
 </body>
