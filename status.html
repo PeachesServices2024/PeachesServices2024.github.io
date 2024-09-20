@@ -59,6 +59,29 @@
         .blue { background-color: #3498db; }
         .red { background-color: #e74c3c; }
 
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .nav-buttons a {
+            padding: 10px 20px;
+            background-color: #f80000;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .nav-buttons a:hover {
+            background-color: #d80000;
+            transform: translateY(-2px);
+        }
+
         /* Login Modal */
         .modal {
             display: none;
@@ -160,6 +183,14 @@
     </style>
 </head>
 <body>
+
+    <!-- Navigation Buttons -->
+    <div class="nav-buttons">
+        <a href="index.html">Home</a>
+        <a href="https://discord.gg/peachesservices">Discord Server</a>
+        <a href="https://peachesservices.com">Products</a>
+    </div>
+
     <!-- Admin Login Button -->
     <button class="login-btn" id="loginBtn">Admin Login</button>
 
