@@ -15,7 +15,7 @@
     <style>
         @font-face {
             font-family: 'PP Monument Extended';
-            src: url('fonts/PPMonumentExtended.woff2') format('woff2'), /* Make sure to change the path to your font file */
+            src: url('fonts/PPMonumentExtended.woff2') format('woff2'),
                  url('fonts/PPMonumentExtended.woff') format('woff');
             font-weight: normal;
             font-style: normal;
@@ -43,52 +43,57 @@
             z-index: 9999;
         }
 
-        .announcement_wrapper {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
         .announcement_text {
             font-family: 'PP Monument Extended', sans-serif;
             font-size: 1.2rem;
             color: white;
-            white-space: nowrap;
             position: absolute;
-            animation: slide_in_out 10s linear infinite;
+            opacity: 0;
+            animation: slide_in_out 25s linear infinite;
+        }
+
+        .announcement1 {
+            animation-delay: 0s;
+        }
+
+        .announcement2 {
+            animation-delay: 5s;
+        }
+
+        .announcement3 {
+            animation-delay: 10s;
+        }
+
+        .announcement4 {
+            animation-delay: 15s;
+        }
+
+        .announcement5 {
+            animation-delay: 20s;
         }
 
         /* Animation for text sliding in and out */
         @keyframes slide_in_out {
-            0% {
-                transform: translateX(100%);
-                opacity: 0;
+            0% { 
+                opacity: 0; 
+                transform: translateY(50px); 
             }
-            10% {
-                transform: translateX(0%);
-                opacity: 1;
+            10% { 
+                opacity: 1; 
+                transform: translateY(0px); 
             }
-            40% {
-                transform: translateX(0%);
-                opacity: 1;
+            40% { 
+                opacity: 1; 
+                transform: translateY(0px); 
             }
-            50% {
-                transform: translateX(-100%);
-                opacity: 0;
+            50% { 
+                opacity: 0; 
+                transform: translateY(-50px); 
             }
-            100% {
-                transform: translateX(-100%);
-                opacity: 0;
+            100% { 
+                opacity: 0; 
+                transform: translateY(-50px); 
             }
-        }
-
-        /* Announcement Container */
-        .announcements {
-            position: relative;
-            width: 100%;
         }
 
         /* Centered Title and Buttons */
@@ -195,15 +200,11 @@
 <body>
     <!-- Red bar at the top with separate announcements -->
     <div class="top_bar">
-        <div class="announcement_wrapper">
-            <div class="announcements">
-                <div class="announcement_text">Website being worked on.</div>
-                <div class="announcement_text" style="animation-delay: 10s;">Any question contact me on Discord.gg/PeachesServices</div>
-                <div class="announcement_text" style="animation-delay: 20s;">Products on website www.PeachesServices.com</div>
-                <div class="announcement_text" style="animation-delay: 30s;">Will be updated for product status shortly</div>
-                <div class="announcement_text" style="animation-delay: 40s;">Any suggestions please let me know.</div>
-            </div>
-        </div>
+        <div class="announcement_text announcement1">Website being worked on.</div>
+        <div class="announcement_text announcement2">Any question contact me on Discord.gg/PeachesServices</div>
+        <div class="announcement_text announcement3">Products on website www.PeachesServices.com</div>
+        <div class="announcement_text announcement4">Will be updated for product status shortly</div>
+        <div class="announcement_text announcement5">Any suggestions please let me know.</div>
     </div>
 
     <!-- Header Section with Buttons and Title -->
