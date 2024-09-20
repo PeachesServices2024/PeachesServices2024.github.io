@@ -146,6 +146,32 @@
             margin-left: 5px;
         }
 
+        /* Admin Login Styling */
+        .admin-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .login-btn, .dashboard-btn {
+            padding: 10px 20px;
+            background-color: #f80000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 20px 10px;
+        }
+
+        .login-btn:hover, .dashboard-btn:hover {
+            background-color: #e00000;
+        }
+
+        .logged-in-message {
+            font-size: 1.2rem;
+            color: #fff;
+            margin-top: 20px;
+        }
+
     </style>
 </head>
 <body>
@@ -161,6 +187,13 @@
             <a href="https://peachesservices.com" class="button">Products</a>
             <a href="status.html" class="button">Check Cheat Status</a>
         </div>
+    </div>
+
+    <!-- Admin Section -->
+    <div class="admin-container">
+        <button class="login-btn" id="loginBtn">Admin Login</button>
+        <p class="logged-in-message" id="loggedInMessage" style="display:none;"></p>
+        <button class="dashboard-btn" id="dashboardBtn" style="display:none;">Admin Dashboard</button>
     </div>
 
     <!-- Updated Product Card -->
@@ -180,6 +213,37 @@
             </a>
         </div>
     </div>
+
+    <script>
+        const loginBtn = document.getElementById('loginBtn');
+        const loggedInMessage = document.getElementById('loggedInMessage');
+        const dashboardBtn = document.getElementById('dashboardBtn');
+
+        let isLoggedIn = false; // This can later be tied to a real authentication system
+
+        loginBtn.addEventListener('click', () => {
+            const username = prompt('Enter Admin Username:');
+            const password = prompt('Enter Admin Password:');
+            
+            // Simple login logic - replace with actual authentication
+            if (username === 'PeachesServices2024' && password === 'PeachTerps1963@') {
+                isLoggedIn = true;
+                loginBtn.style.display = 'none';
+                loggedInMessage.style.display = 'block';
+                dashboardBtn.style.display = 'block';
+                loggedInMessage.innerText = 'Logged in as: ' + username;
+            } else {
+                alert('Invalid login details.');
+            }
+        });
+
+        // Redirect to Admin Dashboard when the button is clicked
+        dashboardBtn.addEventListener('click', () => {
+            if (isLoggedIn) {
+                window.location.href = 'admin_dashboard.html'; // Change this to the actual dashboard URL
+            }
+        });
+    </script>
 
 </body>
 </html>
