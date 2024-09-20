@@ -81,6 +81,32 @@
             transform: translateY(-2px);
         }
 
+        /* Admin Login and Dashboard */
+        .admin-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .login-btn, .dashboard-btn {
+            padding: 10px 20px;
+            background-color: #f80000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 20px 10px;
+        }
+
+        .login-btn:hover, .dashboard-btn:hover {
+            background-color: #e00000;
+        }
+
+        .logged-in-message {
+            font-size: 1.2rem;
+            color: #fff;
+            margin-top: 20px;
+        }
+
         /* Table Styling */
         table {
             width: 100%;
@@ -113,14 +139,6 @@
         tr:hover {
             background-color: #333;
         }
-
-        /* Responsive Adjustments */
-        @media (max-width: 768px) {
-            .status-bar {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-        }
     </style>
 </head>
 <body>
@@ -130,6 +148,13 @@
         <a href="index.html">Home</a>
         <a href="https://discord.gg/peachesservices">Discord Server</a>
         <a href="https://peachesservices.com">Products</a>
+    </div>
+
+    <!-- Admin Section -->
+    <div class="admin-container">
+        <button class="login-btn" id="loginBtn">Admin Login</button>
+        <p class="logged-in-message" id="loggedInMessage" style="display:none;"></p>
+        <button class="dashboard-btn" id="dashboardBtn" style="display:none;">Admin Dashboard</button>
     </div>
 
     <div class="status-container">
@@ -157,9 +182,43 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const storedCategories = JSON.parse(localStorage.getItem('categories')) || {};
+            const loginBtn = document.getElementById('loginBtn');
+            const loggedInMessage = document.getElementById('loggedInMessage');
+            const dashboardBtn = document.getElementById('dashboardBtn');
 
+            // Check if already logged in
+            const storedUsername = localStorage.getItem('username');
+            if (storedUsername) {
+                loginBtn.style.display = 'none';
+                loggedInMessage.style.display = 'block';
+                dashboardBtn.style.display = 'block';
+                loggedInMessage.innerText = 'Logged in as: ' + storedUsername;
+            }
+
+            loginBtn.addEventListener('click', () => {
+                const username = prompt('Enter Admin Username:');
+                const password = prompt('Enter Admin Password:');
+                
+                if (username === 'PeachesServices2024' && password === 'PeachTerps1963@') {
+                    localStorage.setItem('username', username);
+                    loginBtn.style.display = 'none';
+                    loggedInMessage.style.display = 'block';
+                    dashboardBtn.style.display = 'block';
+                    loggedInMessage.innerText = 'Logged in as: ' + username;
+                } else {
+                    alert('Invalid login details.');
+                }
+            });
+
+            // Redirect to Admin Dashboard
+            dashboardBtn.addEventListener('click', () => {
+                window.location.href = 'admin_dashboard.html';
+            });
+
+            // Load product status bars from localStorage
+            const storedCategories = JSON.parse(localStorage.getItem('categories')) || {};
             const statusBars = document.getElementById('statusBars');
+
             for (const category in storedCategories) {
                 const products = storedCategories[category];
                 products.forEach(product => {
