@@ -3,79 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cheat Status - Peaches Services</title>
+    <title>Cheat Status - Peaches Services</title> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    
-    <!-- Modern Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
     <style>
-        /* Global Styles */
         body {
             background-color: #1a1a1a;
             color: white;
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
+            font-family: Arial, sans-serif;
             padding: 20px;
         }
 
         h1, h2 {
             text-align: center;
             color: #f80000;
-            font-weight: 600;
-            margin-bottom: 20px;
         }
 
         .status-container {
             max-width: 1000px;
             margin: 0 auto;
-            padding: 30px;
+            padding: 20px;
             background-color: #121212;
-            border-radius: 15px;
-            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
         }
 
-        /* Status Bars */
         .status-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 25px;
+            padding: 10px 20px;
             margin: 15px 0;
-            border-radius: 10px;
-            background-color: #333;
-            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);
-            transition: transform 0.3s ease, background-color 0.3s ease;
-            font-weight: 500;
-            font-size: 1.1rem;
-        }
-
-        .status-bar:hover {
-            background-color: #444;
-            transform: translateY(-3px);
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            font-weight: bold;
+            font-size: 1.2rem;
         }
 
         .status-bar a {
-            padding: 10px 20px;
+            padding: 8px 15px;
             background-color: #f80000;
             color: white;
             text-decoration: none;
             border-radius: 5px;
-            font-size: 1rem;
-            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            transition: background-color 0.3s ease;
         }
 
         .status-bar a:hover {
-            background-color: #e00000;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+            background-color: #d80000;
         }
 
         /* Status Color Bars */
-        .green { background-color: #27ae60; }
+        .green { background-color: #2ecc71; }
         .orange { background-color: #e67e22; }
-        .white { background-color: #f1c40f; }
+        .yellow { background-color: #f1c40f; }
         .blue { background-color: #3498db; }
         .red { background-color: #e74c3c; }
+
+        /* Login Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+        }
+
+        .modal-content input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .modal-content button {
+            padding: 10px 20px;
+            background-color: #f80000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .modal-content button:hover {
+            background-color: #d80000;
+        }
+
+        .login-btn {
+            padding: 10px 20px;
+            background-color: #f80000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 20px 0;
+        }
+
+        .login-btn:hover {
+            background-color: #d80000;
+        }
 
         /* Table Styling */
         table {
@@ -84,24 +124,22 @@
             border-collapse: collapse;
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.4);
         }
 
         table, th, td {
-            border: none;
+            border: 1px solid #444;
         }
 
         th, td {
-            padding: 15px 20px;
+            padding: 12px 15px;
             text-align: left;
             background-color: #2b2b2b;
-            font-size: 1rem;
         }
 
         th {
             background-color: #f80000;
             color: white;
-            font-weight: 600;
+            font-weight: bold;
         }
 
         tr:nth-child(even) {
@@ -117,25 +155,29 @@
             .status-bar {
                 flex-direction: column;
                 align-items: flex-start;
-                padding: 10px;
-            }
-
-            .status-bar a {
-                margin-top: 10px;
-            }
-
-            th, td {
-                font-size: 0.9rem;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Admin Login Button -->
+    <button class="login-btn" id="loginBtn">Admin Login</button>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <h2>Admin Login</h2>
+            <input type="text" id="username" placeholder="Username">
+            <input type="password" id="password" placeholder="Password">
+            <button onclick="login()">Login</button>
+        </div>
+    </div>
+
     <div class="status-container">
         <h1>Cheat Status</h1>
         
         <!-- Status Bars -->
-        <div class="status-bar green">
+        <div class="status-bar green" id="product1">
             <span>Fivem - Macho Chair</span>
             <a href="https://peachesservices.com/product/macho-fivem">Purchase</a>
         </div>
@@ -151,7 +193,7 @@
             </thead>
             <tbody>
                 <tr>
-                    <td style="background-color: #27ae60;">Green</td>
+                    <td style="background-color: #2ecc71;">Green</td>
                     <td>Operational</td>
                 </tr>
                 <tr>
@@ -159,7 +201,7 @@
                     <td>Use at own risk</td>
                 </tr>
                 <tr>
-                    <td style="background-color: #f1c40f;">White</td>
+                    <td style="background-color: #f1c40f;">Yellow</td>
                     <td>Testing</td>
                 </tr>
                 <tr>
@@ -173,5 +215,53 @@
             </tbody>
         </table>
     </div>
+
+    <script>
+        const loginBtn = document.getElementById('loginBtn');
+        const loginModal = document.getElementById('loginModal');
+        const product1 = document.getElementById('product1');
+        let isLoggedIn = false;
+
+        // Open login modal
+        loginBtn.addEventListener('click', () => {
+            loginModal.style.display = 'flex';
+        });
+
+        // Admin login function
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username === 'PeachesServices2024' && password === 'PeachTerps1963@') {
+                alert('Login successful!');
+                isLoggedIn = true;
+                loginModal.style.display = 'none';
+                enableStatusToggle(product1); // Enable status toggle
+            } else {
+                alert('Incorrect username or password');
+            }
+        }
+
+        // Function to toggle product status
+        function enableStatusToggle(product) {
+            product.addEventListener('click', () => {
+                if (isLoggedIn) {
+                    const currentClass = product.classList[1];
+                    const classes = ['green', 'orange', 'yellow', 'blue', 'red'];
+                    const currentIndex = classes.indexOf(currentClass);
+                    const nextIndex = (currentIndex + 1) % classes.length;
+                    product.classList.remove(currentClass);
+                    product.classList.add(classes[nextIndex]);
+                }
+            });
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            if (event.target == loginModal) {
+                loginModal.style.display = 'none';
+            }
+        }
+    </script>
 </body>
 </html>
