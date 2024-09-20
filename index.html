@@ -18,14 +18,48 @@
             padding: 20px;
         }
 
-        /* Red bar at the top */
+        /* Red bar at the top with increased height */
         .top-bar {
             width: 100%;
-            height: 10px;
+            height: 50px;
             background-color: #f80000;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* Announcement text styling and animation */
+        .announcement {
+            font-size: 1.2rem;
+            color: white;
             position: absolute;
-            top: 0;
-            left: 0;
+            white-space: nowrap;
+            animation: slideIn 10s ease-in-out infinite;
+        }
+
+        @keyframes slideIn {
+            0% {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            10% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            40% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            50% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
         }
 
         /* Centered Title and Buttons */
@@ -129,8 +163,12 @@
     </style>
 </head>
 <body>
-    <!-- Red bar at the top -->
-    <div class="top-bar"></div>
+    <!-- Red bar with scrolling announcements -->
+    <div class="top-bar">
+        <div class="announcement" id="announcementText">
+            Website being worked on.
+        </div>
+    </div>
 
     <!-- Header Section with Buttons and Title -->
     <div class="header">
@@ -158,5 +196,27 @@
             <a href="https://peachesservices.com/product/macho-fivem" class="product-link">Buy Now</a>
         </div>
     </div>
+
+    <script>
+        const announcements = [
+            "Website being worked on.",
+            "Any questions contact me on Discord.gg/PeachesServices",
+            "Products on website www.PeachesServices.com",
+            "Will be updated for product status shortly",
+            "Any suggestions please let me know."
+        ];
+
+        let currentIndex = 0;
+        const announcementText = document.getElementById('announcementText');
+
+        function updateAnnouncement() {
+            announcementText.textContent = announcements[currentIndex];
+            currentIndex = (currentIndex + 1) % announcements.length;
+        }
+
+        // Set interval to change announcements every 10 seconds (adjust as needed)
+        setInterval(updateAnnouncement, 10000); // 10 seconds per announcement
+    </script>
+
 </body>
 </html>
