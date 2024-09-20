@@ -18,38 +18,38 @@
             padding: 20px;
         }
 
-        /* Red bar at the top with increased height */
-        .top-bar {
+        /* Red bar at the top */
+        .top_bar {
             width: 100%;
             height: 50px;
             background-color: #f80000;
-            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            position: relative;
         }
 
-        /* Announcement text styling and animation */
-        .announcement {
+        .announcement_text {
             font-size: 1.2rem;
             color: white;
-            position: absolute;
             white-space: nowrap;
-            animation: slideIn 10s ease-in-out infinite;
+            position: absolute;
+            animation: slide_in_out 20s linear infinite;
         }
 
-        @keyframes slideIn {
+        /* Animation for text sliding in and out */
+        @keyframes slide_in_out {
             0% {
                 transform: translateX(100%);
                 opacity: 0;
             }
             10% {
-                transform: translateX(0);
+                transform: translateX(0%);
                 opacity: 1;
             }
             40% {
-                transform: translateX(0);
+                transform: translateX(0%);
                 opacity: 1;
             }
             50% {
@@ -76,7 +76,7 @@
         .buttons {
             display: flex;
             justify-content: center;
-            gap: 20px; /* Add space between buttons */
+            gap: 20px;
             margin-top: 20px;
         }
 
@@ -163,10 +163,12 @@
     </style>
 </head>
 <body>
-    <!-- Red bar with scrolling announcements -->
-    <div class="top-bar">
-        <div class="announcement" id="announcementText">
-            Website being worked on.
+    <!-- Red bar at the top with announcements -->
+    <div class="top_bar">
+        <div class="announcement_text">
+            Website being worked on. | Any question contact me on Discord.gg/PeachesServices |
+            Products on website www.PeachesServices.com | Will be updated for product status shortly |
+            Any suggestions please let me know.
         </div>
     </div>
 
@@ -196,27 +198,5 @@
             <a href="https://peachesservices.com/product/macho-fivem" class="product-link">Buy Now</a>
         </div>
     </div>
-
-    <script>
-        const announcements = [
-            "Website being worked on.",
-            "Any questions contact me on Discord.gg/PeachesServices",
-            "Products on website www.PeachesServices.com",
-            "Will be updated for product status shortly",
-            "Any suggestions please let me know."
-        ];
-
-        let currentIndex = 0;
-        const announcementText = document.getElementById('announcementText');
-
-        function updateAnnouncement() {
-            announcementText.textContent = announcements[currentIndex];
-            currentIndex = (currentIndex + 1) % announcements.length;
-        }
-
-        // Set interval to change announcements every 10 seconds (adjust as needed)
-        setInterval(updateAnnouncement, 10000); // 10 seconds per announcement
-    </script>
-
 </body>
 </html>
