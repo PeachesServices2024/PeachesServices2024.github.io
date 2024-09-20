@@ -18,17 +18,20 @@
             padding: 20px;
         }
 
-        /* Centered Title and Buttons */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 40px;
+        /* Red bar at the top */
+        .top-bar {
+            width: 100%;
+            height: 10px;
+            background-color: #f80000;
+            position: absolute;
+            top: 0;
+            left: 0;
         }
 
-        .header .title {
+        /* Centered Title and Buttons */
+        .header {
             text-align: center;
-            flex-grow: 1;
+            margin-bottom: 40px;
         }
 
         .header h1 {
@@ -36,8 +39,11 @@
             font-size: 2rem;
         }
 
-        .header .button-left, .header .button-right {
-            flex-shrink: 0;
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* Add space between buttons */
+            margin-top: 20px;
         }
 
         .button {
@@ -123,22 +129,19 @@
     </style>
 </head>
 <body>
+    <!-- Red bar at the top -->
+    <div class="top-bar"></div>
+
     <!-- Header Section with Buttons and Title -->
     <div class="header">
-        <!-- Left Button: Discord Server -->
-        <div class="button-left">
+        <h1>Peaches Hub</h1>
+        <p>Being worked on will update further. Adding Product Status and Featured Products!</p>
+
+        <!-- Buttons aligned in a row -->
+        <div class="buttons">
             <a href="https://discord.gg/peachesservices" class="button">Discord Server</a>
-        </div>
-
-        <!-- Center Title: Peaches Hub -->
-        <div class="title">
-            <h1>Peaches Hub</h1>
-            <p>Being worked on will update further. Adding Product Status and Featured Products!</p>
-        </div>
-
-        <!-- Right Button: Products -->
-        <div class="button-right">
             <a href="https://peachesservices.com" class="button">Products</a>
+            <a href="status.html" class="button">Check Cheat Status</a>
         </div>
     </div>
 
@@ -155,11 +158,5 @@
             <a href="https://peachesservices.com/product/macho-fivem" class="product-link">Buy Now</a>
         </div>
     </div>
-
-    <!-- Status Page Link Button -->
-    <div class="content">
-        <a href="status.html" class="status-link">Check Cheat Status</a>
-    </div>
-
 </body>
 </html>
