@@ -150,6 +150,18 @@
             color: #ccc;
         }
 
+        /* Price List Styling */
+        .price-list {
+            text-align: left;
+            font-size: 0.9rem;
+            color: #fff;
+            margin: 10px 0;
+        }
+
+        .price-list li {
+            margin: 5px 0;
+        }
+
         .product-price {
             font-size: 1.3rem;
             color: #f80000;
@@ -221,14 +233,19 @@
 
     <!-- Product Cards Section -->
     <div class="products-container">
-        <!-- Product 1 -->
+        <!-- Product 1: Macho Fivem -->
         <div class="product-card">
             <img src="https://i.ibb.co/k6zCrk9/public-2.jpg" alt="Macho Fivem Product Image">
             <h3 class="product-name">Macho Fivem</h3>
             <p class="product-description">
                 Spoofer included with visuals, aimbot, and other features for enhanced gameplay.
             </p>
-            <p class="product-price">$49.99</p>
+            <ul class="price-list">
+                <li>Day Key: $4.99</li>
+                <li>Week Key: $9.99</li>
+                <li>Month Key: $19.99</li>
+                <li>Lifetime Key: $64.99</li>
+            </ul>
 
             <!-- Buy Button -->
             <button class="buy-button" onclick="window.sellAuthEmbed.openProductModal({ domain: 'peachesservices.sellauth.com', product: 'macho-fivem' })">
@@ -236,7 +253,26 @@
             </button>
         </div>
 
-        <!-- Add more product cards here if needed -->
+        <!-- Product 2: DMA Card -->
+        <div class="product-card">
+            <img src="https://i.ibb.co/thD4njS/public-3.jpg" alt="DMA Card Product Image">
+            <h3 class="product-name">DMA Card</h3>
+            <p class="product-description">
+                High-speed DMA card with memory manipulation, ideal for advanced users.
+            </p>
+            <ul class="price-list">
+                <li>Card [No Firmware]: $225</li>
+                <li>CUSTOM FW [BE/EAC]: $325</li>
+                <li>CUSTOM FW [BE/EAC/VAL]: $475</li>
+                <li>CUSTOM FW [BE/EAC/FACEIT]: $550</li>
+            </ul>
+
+            <!-- Buy Button -->
+            <button class="buy-button" onclick="window.sellAuthEmbed.openProductModal({ domain: 'peachesservices.sellauth.com', product: 'dma-card' })">
+                Buy Now
+            </button>
+        </div>
+
     </div>
 
     <!-- SellAuth Script -->
