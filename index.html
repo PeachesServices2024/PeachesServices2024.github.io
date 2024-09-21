@@ -209,6 +209,8 @@
                                 <a href="https://peachesservices.com/product/${product.name.replace(/\s+/g, '-').toLowerCase()}" class="product-link">
                                     Buy Now <i class="fas fa-shopping-cart"></i>
                                 </a>
+                                <!-- SellAuth Buy Button -->
+                                <button onclick="window.sellAuthEmbed.openProductModal({ domain: 'peachesservices.sellauth.com', product: 'macho-fivem' })">Buy</button>
                             </div>
                         `;
                         productCards.appendChild(productCard);
@@ -249,5 +251,7 @@
         });
     </script>
 
+    <!-- SellAuth Script -->
+    <script src="https://sellauth.com/assets/js/sellauth-embed.js"></script>
 </body>
 </html>
