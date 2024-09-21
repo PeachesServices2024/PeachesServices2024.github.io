@@ -133,68 +133,6 @@
             padding: 20px;
             border-radius: 10px;
         }
-
-        .product-card {
-            background-color: #2B2B2B;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px auto;
-            width: 100%;
-            max-width: 400px;
-            transition: transform 0.3s ease-in-out;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
-        }
-
-        .product-card:hover {
-            transform: scale(1.05);
-        }
-
-        .product-card img {
-            width: 100%;
-            height: auto;
-            object-fit: contain;
-            border-radius: 8px;
-            transition: transform 0.5s;
-        }
-
-        .product-card:hover img {
-            transform: scale(1.1);
-        }
-
-        .product-details {
-            padding: 20px;
-            text-align: left;
-        }
-
-        .product-name {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .product-price {
-            color: #f80000;
-            font-size: 1.2rem;
-            font-weight: bold;
-        }
-
-        .product-availability {
-            color: #999;
-        }
-
-        .product-link, .status-link {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 10px 20px;
-            background-color: #f80000;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-
-        .product-link:hover, .status-link:hover {
-            background-color: #e00000;
-        }
     </style>
 </head>
 <body>
@@ -220,18 +158,9 @@
         </div>
     </div>
 
-    <!-- Updated Product Card -->
-    <div class="product-card">
-        <div class="aspect-video border-b-2 border-b-border overflow-hidden">
-            <img src="https://imagedelivery.net/HL_Fwm__tlvUGLZF2p74xw/7d02c379-eeff-47b4-ef9b-fbfc75fa2200/public" alt="Macho Fivem" class="aspect-video w-full object-scale-down transition-all duration-500 group-hover:scale-105" />
-        </div>
-        <div class="product-details">
-            <h3 class="product-name">Macho Fivem</h3>
-            <p>Spoofer included with visuals, aimbot, and other features for enhanced gameplay.</p>
-            <p class="product-price">$49.99</p>
-            <p class="product-availability">Available</p>
-            <a href="https://peachesservices.com/product/macho-fivem" class="product-link">Buy Now</a>
-        </div>
-    </div>
+    <!-- Updated Product Button -->
+    <button onclick="window.sellAuthEmbed.openProductModal({ domain: 'peachesservices.sellauth.com', product: 'macho-fivem' })">Buy</button>
+
+    <script src="https://sellauth.com/assets/js/sellauth-embed.js"></script>
 </body>
 </html>
