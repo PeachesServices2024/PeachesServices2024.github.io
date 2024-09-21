@@ -11,16 +11,7 @@
     <meta name="twitter:description" content="[SPOOFER INCLUDED][...] Full Color Selection">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 
-    <!-- Assuming you are hosting the PP Monument Extended font locally -->
     <style>
-        @font-face {
-            font-family: 'PP Monument Extended';
-            src: url('fonts/PPMonumentExtended.woff2') format('woff2'),
-                 url('fonts/PPMonumentExtended.woff') format('woff');
-            font-weight: normal;
-            font-style: normal;
-        }
-
         body {
             background-color: #121111;
             color: white;
@@ -158,9 +149,15 @@
         </div>
     </div>
 
-    <!-- Updated Product Button -->
-    <button onclick="window.sellAuthEmbed.openProductModal({ domain: 'peachesservices.sellauth.com', product: 'macho-fivem' })">Buy</button>
-
+    <!-- Product Modal Automatically Triggered on Page Load -->
     <script src="https://sellauth.com/assets/js/sellauth-embed.js"></script>
+    <script>
+        window.onload = function() {
+            window.sellAuthEmbed.openProductModal({
+                domain: 'peachesservices.sellauth.com',
+                product: 'macho-fivem'
+            });
+        };
+    </script>
 </body>
 </html>
