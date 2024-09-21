@@ -3,10 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Peaches Hub</title>
+    <title>Macho Fivem - PeachesServices</title>
+    <meta name="description" content="[SPOOFER INCLUDED][...] Full Color Selection">
+    <meta property="og:title" content="Macho Fivem - PeachesServices">
+    <meta property="og:description" content="[SPOOFER INCLUDED][...] Full Color Selection">
+    <meta name="twitter:title" content="Macho Fivem - PeachesServices">
+    <meta name="twitter:description" content="[SPOOFER INCLUDED][...] Full Color Selection">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 
+    <!-- Assuming you are hosting the PP Monument Extended font locally -->
     <style>
+        @font-face {
+            font-family: 'PP Monument Extended';
+            src: url('fonts/PPMonumentExtended.woff2') format('woff2'),
+                 url('fonts/PPMonumentExtended.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         body {
             background-color: #121111;
             color: white;
@@ -14,7 +28,75 @@
             padding: 20px;
         }
 
-        /* Centered Header and Buttons */
+        /* Red bar at the top */
+        .top_bar {
+            width: 100%;
+            height: 60px;
+            background-color: #f80000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+        }
+
+        .announcement_text {
+            font-family: 'PP Monument Extended', sans-serif;
+            font-size: 1.2rem;
+            color: white;
+            position: absolute;
+            opacity: 0;
+            animation: slide_in_out 30s linear infinite;
+        }
+
+        .announcement1 {
+            animation-delay: 0s;
+        }
+
+        .announcement2 {
+            animation-delay: 6s;
+        }
+
+        .announcement3 {
+            animation-delay: 12s;
+        }
+
+        .announcement4 {
+            animation-delay: 18s;
+        }
+
+        .announcement5 {
+            animation-delay: 24s;
+        }
+
+        /* Animation for text sliding in and out */
+        @keyframes slide_in_out {
+            0% { 
+                opacity: 0; 
+                transform: translateY(50px); 
+            }
+            10% { 
+                opacity: 1; 
+                transform: translateY(0px); 
+            }
+            20% { 
+                opacity: 1; 
+                transform: translateY(0px); 
+            }
+            30% { 
+                opacity: 0; 
+                transform: translateY(-50px); 
+            }
+            100% { 
+                opacity: 0; 
+                transform: translateY(-50px); 
+            }
+        }
+
+        /* Centered Title and Buttons */
         .header {
             text-align: center;
             margin-top: 100px;
@@ -23,13 +105,7 @@
 
         .header h1 {
             color: #f80000;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-
-        .header p {
-            font-size: 1.1rem;
-            color: #999;
+            font-size: 2rem;
         }
 
         .buttons {
@@ -45,127 +121,98 @@
             color: white;
             text-decoration: none;
             border-radius: 5px;
-            font-size: 1rem;
-            transition: background-color 0.3s ease, transform 0.3s ease;
+            transition: background-color 0.3s ease;
         }
 
         .button:hover {
             background-color: #e00000;
-            transform: translateY(-2px);
         }
 
-        /* Updated Product Card */
+        .content {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
         .product-card {
             background-color: #2B2B2B;
             padding: 20px;
-            border-radius: 15px;
+            border-radius: 10px;
             margin: 20px auto;
             width: 100%;
             max-width: 400px;
-            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.6);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            overflow: hidden;
+            transition: transform 0.3s ease-in-out;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
         }
 
         .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.8);
+            transform: scale(1.05);
         }
 
         .product-card img {
             width: 100%;
             height: auto;
-            border-radius: 10px;
-            object-fit: cover;
+            object-fit: contain;
+            border-radius: 8px;
             transition: transform 0.5s;
         }
 
         .product-card:hover img {
-            transform: scale(1.05);
+            transform: scale(1.1);
         }
 
         .product-details {
-            padding: 15px;
+            padding: 20px;
             text-align: left;
         }
 
         .product-name {
             font-size: 1.5rem;
-            color: #ffffff;
-            margin-bottom: 10px;
-        }
-
-        .product-description {
-            font-size: 1rem;
-            color: #ccc;
-            line-height: 1.5;
-            margin-bottom: 15px;
-        }
-
-        .product-price {
-            color: #f80000;
-            font-size: 1.3rem;
             font-weight: bold;
             margin-bottom: 10px;
         }
 
-        .product-availability {
-            color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 15px;
+        .product-price {
+            color: #f80000;
+            font-size: 1.2rem;
+            font-weight: bold;
         }
 
-        .product-link {
+        .product-availability {
+            color: #999;
+        }
+
+        .product-link, .status-link {
             display: inline-block;
-            padding: 12px 20px;
+            margin-top: 15px;
+            padding: 10px 20px;
             background-color: #f80000;
             color: white;
             text-decoration: none;
             border-radius: 5px;
-            font-size: 1rem;
-            transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
-        .product-link:hover {
+        .product-link:hover, .status-link:hover {
             background-color: #e00000;
-            transform: translateY(-2px);
-        }
-
-        /* Admin Login Styling */
-        .admin-container {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .login-btn, .dashboard-btn {
-            padding: 10px 20px;
-            background-color: #f80000;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 20px 10px;
-        }
-
-        .login-btn:hover, .dashboard-btn:hover {
-            background-color: #e00000;
-        }
-
-        .logged-in-message {
-            font-size: 1.2rem;
-            color: #fff;
-            margin-top: 20px;
         }
     </style>
 </head>
 <body>
+    <!-- Red bar at the top with separate announcements -->
+    <div class="top_bar">
+        <div class="announcement_text announcement1">Website being worked on.</div>
+        <div class="announcement_text announcement2">Any question contact me on Discord.gg/PeachesServices</div>
+        <div class="announcement_text announcement3">Products on website www.PeachesServices.com</div>
+        <div class="announcement_text announcement4">Will be updated for product status shortly</div>
+        <div class="announcement_text announcement5">Any suggestions please let me know.</div>
+    </div>
 
-    <!-- Header Section -->
+    <!-- Header Section with Buttons and Title -->
     <div class="header">
         <h1>Peaches Hub</h1>
-        <p>Enhancing your gaming experience with premium tools and products.</p>
+        <p>Being worked on will update further. Adding Product Status and Featured Products!</p>
 
-        <!-- Navigation Buttons -->
+        <!-- Buttons aligned in a row -->
         <div class="buttons">
             <a href="https://discord.gg/peachesservices" class="button">Discord Server</a>
             <a href="https://peachesservices.com" class="button">Products</a>
@@ -173,85 +220,18 @@
         </div>
     </div>
 
-    <!-- Product Card Section -->
-    <div id="productCards"></div>
-
-    <!-- Admin Section -->
-    <div class="admin-container">
-        <button class="login-btn" id="loginBtn">Admin Login</button>
-        <p class="logged-in-message" id="loggedInMessage" style="display:none;"></p>
-        <button class="dashboard-btn" id="dashboardBtn" style="display:none;">Admin Dashboard</button>
+    <!-- Updated Product Card -->
+    <div class="product-card">
+        <div class="aspect-video border-b-2 border-b-border overflow-hidden">
+            <img src="https://imagedelivery.net/HL_Fwm__tlvUGLZF2p74xw/7d02c379-eeff-47b4-ef9b-fbfc75fa2200/public" alt="Macho Fivem" class="aspect-video w-full object-scale-down transition-all duration-500 group-hover:scale-105" />
+        </div>
+        <div class="product-details">
+            <h3 class="product-name">Macho Fivem</h3>
+            <p>Spoofer included with visuals, aimbot, and other features for enhanced gameplay.</p>
+            <p class="product-price">$49.99</p>
+            <p class="product-availability">Available</p>
+            <a href="https://peachesservices.com/product/macho-fivem" class="product-link">Buy Now</a>
+        </div>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const loginBtn = document.getElementById('loginBtn');
-            const loggedInMessage = document.getElementById('loggedInMessage');
-            const dashboardBtn = document.getElementById('dashboardBtn');
-            const productCards = document.getElementById('productCards');
-
-            // Fetch products from the database
-            fetch('/api/products')
-                .then(response => response.json())
-                .then(data => {
-                    data.products.forEach(product => {
-                        const productCard = document.createElement('div');
-                        productCard.classList.add('product-card');
-                        productCard.innerHTML = `
-                            <div>
-                                <img src="${product.image}" alt="${product.name}" />
-                            </div>
-                            <div class="product-details">
-                                <h3 class="product-name">${product.name}</h3>
-                                <p class="product-description">${product.description}</p>
-                                <p class="product-price">$${product.price}</p>
-                                <p class="product-availability">${product.availability}</p>
-                                <a href="https://peachesservices.com/product/${product.name.replace(/\s+/g, '-').toLowerCase()}" class="product-link">
-                                    Buy Now <i class="fas fa-shopping-cart"></i>
-                                </a>
-                                <!-- SellAuth Buy Button -->
-                                <button onclick="window.sellAuthEmbed.openProductModal({ domain: 'peachesservices.sellauth.com', product: 'macho-fivem' })">Buy</button>
-                            </div>
-                        `;
-                        productCards.appendChild(productCard);
-                    });
-                });
-
-            // Check if already logged in
-            const storedUsername = localStorage.getItem('username');
-            if (storedUsername) {
-                loginBtn.style.display = 'none';
-                loggedInMessage.style.display = 'block';
-                dashboardBtn.style.display = 'block';
-                loggedInMessage.innerText = 'Logged in as: ' + storedUsername;
-            }
-
-            loginBtn.addEventListener('click', () => {
-                const username = prompt('Enter Admin Username:');
-                const password = prompt('Enter Admin Password:');
-
-                // Check credentials (In real-world applications, this should be done on the server)
-                if (username === 'PeachesServices2024' && password === 'PeachTerps1963@') {
-                    localStorage.setItem('username', username);
-
-                    // Hide the login button and show the dashboard link
-                    loginBtn.style.display = 'none';
-                    loggedInMessage.style.display = 'block';
-                    dashboardBtn.style.display = 'block';
-                    loggedInMessage.innerText = 'Logged in as: ' + username;
-                } else {
-                    alert('Invalid login details.');
-                }
-            });
-
-            // Redirect to Admin Dashboard
-            dashboardBtn.addEventListener('click', () => {
-                window.location.href = 'admin_dashboard.html';
-            });
-        });
-    </script>
-
-    <!-- SellAuth Script -->
-    <script src="https://sellauth.com/assets/js/sellauth-embed.js"></script>
 </body>
 </html>
