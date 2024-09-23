@@ -77,23 +77,36 @@
             background-color: rgba(255, 0, 0, 0.5);
         }
 
-        /* Login Form */
-        .login-form {
-            max-width: 300px;
-            margin: 0 auto;
-            text-align: center;
-            display: none;
+        /* Modal Popup for Password */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            background-color: rgba(0,0,0,0.5); 
         }
 
-        .login-form input {
+        .modal-content {
+            background-color: #333;
+            margin: 15% auto; 
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+            color: white;
+        }
+
+        .modal-content input {
             padding: 10px;
-            margin: 10px;
             width: 80%;
             border: none;
             border-radius: 5px;
         }
 
-        .login-form button {
+        .modal-content button {
             padding: 10px;
             margin-top: 10px;
             background-color: #ff4d4d;
@@ -103,7 +116,7 @@
             cursor: pointer;
         }
 
-        .login-form button:hover {
+        .modal-content button:hover {
             background-color: #e04a4a;
         }
 
@@ -177,12 +190,15 @@
     </div>
 
     <!-- Invisible Login Button -->
-    <button id="invisibleLoginButton" onclick="showLoginForm()"></button>
+    <button id="invisibleLoginButton" onclick="openModal()"></button>
 
-    <!-- Login Form -->
-    <div class="login-form" id="loginForm">
-        <input type="password" id="password" placeholder="Enter Password">
-        <button onclick="login()">Login</button>
+    <!-- Modal Popup -->
+    <div id="passwordModal" class="modal">
+        <div class="modal-content">
+            <h2>Enter Password</h2>
+            <input type="password" id="passwordInput" placeholder="Enter Password">
+            <button onclick="login()">Submit</button>
+        </div>
     </div>
 
     <!-- Logout Button -->
@@ -470,17 +486,23 @@
             return CryptoJS.MD5(string).toString();
         }
 
-        function showLoginForm() {
-            document.getElementById('loginForm').style.display = 'block';
+        // Function to open modal
+        function openModal() {
+            document.getElementById('passwordModal').style.display = 'block';
+        }
+
+        // Function to close modal
+        function closeModal() {
+            document.getElementById('passwordModal').style.display = 'none';
         }
 
         function login() {
-            const passwordInput = document.getElementById('password').value;
+            const passwordInput = document.getElementById('passwordInput').value;
             const hashedInput = md5(passwordInput);
 
             if (hashedInput === correctHashedPassword) {
                 alert('Login successful!');
-                document.getElementById('loginForm').style.display = 'none';
+                document.getElementById('passwordModal').style.display = 'none';
                 document.getElementById('logoutContainer').style.display = 'block';
                 sessionStorage.setItem('loggedIn', 'true');
             } else {
@@ -491,16 +513,10 @@
         function logout() {
             sessionStorage.removeItem('loggedIn');
             document.getElementById('logoutContainer').style.display = 'none';
-            document.getElementById('loginForm').style.display = 'block';
         }
 
-        // Function to change status on click
+        // Function to change status on click (no login required)
         function changeStatus(element, cheatName) {
-            if (!sessionStorage.getItem('loggedIn')) {
-                alert('Please log in to change status.');
-                return;
-            }
-
             const statuses = ['green', 'orange', 'white', 'blue', 'red'];
             const currentClass = statuses.find(cls => element.classList.contains(cls));
             const nextStatus = statuses[(statuses.indexOf(currentClass) + 1) % statuses.length];
@@ -529,11 +545,7 @@
         // Check if the user is already logged in
         window.onload = function() {
             if (sessionStorage.getItem('loggedIn')) {
-                document.getElementById('loginForm').style.display = 'none';
                 document.getElementById('logoutContainer').style.display = 'block';
-            } else {
-                document.getElementById('loginForm').style.display = 'block';
-                document.getElementById('logoutContainer').style.display = 'none';
             }
 
             loadSavedStatuses();
