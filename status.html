@@ -210,8 +210,6 @@
     <div class="status-container" id="statusContainer">
         <h1>Cheat Status</h1>
 
-        <!-- Add all product status bars below -->
-
         <!-- Arena Breakout -->
         <div class="status-bar green green-status" onclick="changeStatus(this, 'Arena Breakout - Dex Chair')">
             <span>Arena Breakout - Dex Chair</span>
@@ -479,12 +477,7 @@
     </div>
 
     <script>
-        const correctHashedPassword = '39c198e96bdf89e0b8e0b0b639d603b6'; // Hashed value of Peaches9999@
-
-        // Function to encrypt the entered password using MD5
-        function md5(string) {
-            return CryptoJS.MD5(string).toString();
-        }
+        const correctHashedPassword = btoa('Peaches9999@'); // Base64 encoding of the password
 
         // Function to open modal
         function openModal() {
@@ -498,11 +491,11 @@
 
         function login() {
             const passwordInput = document.getElementById('passwordInput').value;
-            const hashedInput = md5(passwordInput);
+            const hashedInput = btoa(passwordInput);
 
             if (hashedInput === correctHashedPassword) {
                 alert('Login successful!');
-                document.getElementById('passwordModal').style.display = 'none';
+                closeModal();
                 document.getElementById('logoutContainer').style.display = 'block';
                 sessionStorage.setItem('loggedIn', 'true');
             } else {
@@ -515,8 +508,13 @@
             document.getElementById('logoutContainer').style.display = 'none';
         }
 
-        // Function to change status on click (no login required)
+        // Function to change status on click (login required)
         function changeStatus(element, cheatName) {
+            if (!sessionStorage.getItem('loggedIn')) {
+                alert('Please log in to change status.');
+                return;
+            }
+
             const statuses = ['green', 'orange', 'white', 'blue', 'red'];
             const currentClass = statuses.find(cls => element.classList.contains(cls));
             const nextStatus = statuses[(statuses.indexOf(currentClass) + 1) % statuses.length];
@@ -552,7 +550,7 @@
         };
     </script>
 
-    <!-- Include MD5 library for password hashing -->
+    <!-- Include Base64 library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
 
 </body>
