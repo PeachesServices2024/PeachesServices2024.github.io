@@ -59,6 +59,36 @@
             box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.5);
         }
 
+        /* Login Form */
+        .login-form {
+            max-width: 300px;
+            margin: 0 auto;
+            text-align: center;
+            display: none;
+        }
+
+        .login-form input {
+            padding: 10px;
+            margin: 10px;
+            width: 80%;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .login-form button {
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .login-form button:hover {
+            background-color: #e04a4a;
+        }
+
         /* Status Bars */
         .status-bar {
             display: flex;
@@ -105,7 +135,7 @@
         }
 
         /* Status Color Bars */
-        .green { background-color: #1d8348; }   /* Darker green */
+        .green { background-color: #1d8348; }
         .orange { background-color: #e67e22; }
         .white { background-color: #ffffff; color: #000000; }
         .blue { background-color: #3498db; }
@@ -117,58 +147,6 @@
         .white-status::before { content: "🔍 "; }
         .blue-status::before { content: "🔄 "; }
         .red-status::before { content: "❌ "; }
-
-        /* Table Styling */
-        table {
-            width: 100%;
-            margin: 30px 0;
-            border-collapse: collapse;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.4);
-        }
-
-        table, th, td {
-            border: none;
-        }
-
-        th, td {
-            padding: 20px;
-            text-align: left;
-            background-color: #2b2b2b;
-            font-size: 1rem;
-        }
-
-        th {
-            background-color: #ff4d4d;
-            color: white;
-            font-weight: 600;
-        }
-
-        tr:nth-child(even) {
-            background-color: #303030;
-        }
-
-        tr:hover {
-            background-color: #3a3a3a;
-        }
-
-        /* Responsive Adjustments */
-        @media (max-width: 768px) {
-            .status-bar {
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 15px;
-            }
-
-            .status-bar a {
-                margin-top: 10px;
-            }
-
-            th, td {
-                font-size: 0.9rem;
-            }
-        }
     </style>
 </head>
 <body>
@@ -180,286 +158,112 @@
         <a href="https://discord.gg/peachesservices">Discord Server</a>
     </div>
 
-    <div class="status-container">
+    <!-- Login Form -->
+    <div class="login-form" id="loginForm">
+        <input type="password" id="password" placeholder="Enter Password">
+        <button onclick="login()">Login</button>
+    </div>
+
+    <!-- Logout Button -->
+    <div class="button-container" id="logoutContainer" style="display: none;">
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <!-- Status Container -->
+    <div class="status-container" id="statusContainer">
         <h1>Cheat Status</h1>
         
         <!-- Arena Breakout -->
-        <div class="status-bar green green-status">
+        <div class="status-bar green green-status" onclick="changeStatus(this, 'Arena Breakout - Dex Chair')">
             <span>Arena Breakout - Dex Chair</span>
             <a href="https://peachesservices.com/product/dex-arena-breakout-infinite">Purchase</a>
         </div>
 
         <!-- Apex Legends -->
-        <div class="status-bar green green-status">
+        <div class="status-bar green green-status" onclick="changeStatus(this, 'Apex Legends - Clutch Chair')">
             <span>Apex Legends - Clutch Chair</span>
             <a href="https://peachesservices.com/product/clutch-legends">Purchase</a>
         </div>
 
-        <!-- BF2042 -->
-        <div class="status-bar green green-status">
-            <span>BF2042 - Fresh Chair</span>
-            <a href="https://peachesservices.com/product/bf2042">Purchase</a>
-        </div>
-
-        <!-- BO6 -->
-        <div class="status-bar blue blue-status">
-            <span>BO6 - Ombra Chair</span>
-            <a href="https://peachesservices.com/product/3057c67786fb2">Purchase</a>
-        </div>
-        <div class="status-bar blue blue-status">
-            <span>BO6 - Silent Chair</span>
-            <a href="https://peachesservices.com/product/d8d3486b1f875">Purchase</a>
-        </div>
-        <div class="status-bar blue blue-status">
-            <span>BO6 - Loud Chair</span>
-            <a href="https://peachesservices.com/product/568a8bf2bc4ee">Purchase</a>
-        </div>
-
-        <!-- CS2 -->
-        <div class="status-bar green green-status">
-            <span>CS2 - Fresh Chair</span>
-            <a href="https://peachesservices.com/product/fresh-cs2">Purchase</a>
-        </div>
-        <div class="status-bar green green-status">
-            <span>CS2 - Glow Chair</span>
-            <a href="https://peachesservices.com/product/glow-cs2">Purchase</a>
-        </div>
-        <div class="status-bar green green-status">
-            <span>CS2 - Clutch Chair</span>
-            <a href="https://peachesservices.com/product/clutch-cs2-external-multi-vac3">Purchase</a>
-        </div>
-
-        <!-- Dark and Darker -->
-        <div class="status-bar green green-status">
-            <span>Dark and Darker - Clutch Chair</span>
-            <a href="https://peachesservices.com/product/clutch-dd">Purchase</a>
-        </div>
-
-        <!-- Dayz -->
-        <div class="status-bar green green-status">
-            <span>Dayz - Labs Chair</span>
-            <a href="https://peachesservices.com/product/labs-dayz">Purchase</a>
-        </div>
-        <div class="status-bar green green-status">
-            <span>Dayz - Fresh Chair</span>
-            <a href="https://peachesservices.com/product/fresh-dayz">Purchase</a>
-        </div>
-
-        <!-- DMA Products -->
-        <div class="status-bar green green-status">
-            <span>DMA Products - DMA Card</span>
-            <a href="https://peachesservices.com/product/dma-card">Purchase</a>
-        </div>
-        <div class="status-bar green green-status">
-            <span>DMA Products - HDMI Fuser</span>
-            <a href="https://peachesservices.com/product/hdmi-fuser">Purchase</a>
-        </div>
-        <div class="status-bar green green-status">
-            <span>DMA Products - KM Box</span>
-            <a href="https://peachesservices.com/product/km-box-b-pro">Purchase</a>
-        </div>
-
-        <!-- DMA Software -->
-        <div class="status-bar green green-status">
-            <span>DMA Software - Clutch Apex</span>
-            <a href="https://peachesservices.com/product/dma-clutch-apex">Purchase</a>
-        </div>
-
-        <!-- EFT -->
-        <div class="status-bar green green-status">
-            <span>EFT - KD Dropper</span>
-            <a href="https://peachesservices.com/product/kd-dropper">Purchase</a>
-        </div>
-        <div class="status-bar green green-status">
-            <span>EFT - Fanta Chair</span>
-            <a href="https://peachesservices.com/product/fanta-eft">Purchase</a>
-        </div>
-        <div class="status-bar green green-status">
-            <span>EFT - ABS ESP</span>
-            <a href="https://peachesservices.com/product/abs-esp-private-7-day-key">Purchase</a>
-        </div>
-        <div class="status-bar green green-status">
-            <span>EFT - Dex Full</span>
-            <a href="https://peachesservices.com/product/dex-full-eft">Purchase</a>
-        </div>
-        <div class="status-bar green green-status">
-            <span>EFT - Dex ESP</span>
-            <a href="https://peachesservices.com/product/dex-esp-eft">Purchase</a>
-        </div>
-        <div class="status-bar green green-status">
-            <span>EFT - IK Rage</span>
-            <a href="https://peachesservices.com/product/ik-rage-eft">Purchase</a>
-        </div>
-        <div class="status-bar green green-status">
-            <span>EFT - Coffee Chair</span>
-            <a href="https://peachesservices.com/product/coffee-eft">Purchase</a>
-        </div>
-        <div class="status-bar green green-status">
-            <span>EFT - Fresh Chair</span>
-            <a href="https://peachesservices.com/product/fresh-eft">Purchase</a>
-        </div>
-        <div class="status-bar green green-status">
-            <span>EFT - Zed Chair</span>
-            <a href="https://peachesservices.com/product/zed-eft">Purchase</a>
-        </div>
-        <div class="status-bar green green-status">
-            <span>EFT - Standard CIS Account</span>
-            <a href="https://peachesservices.com/product/standard-cis-account">Purchase</a>
-        </div>
-        <div class="status-bar green green-status">
-            <span>EFT - Clutch Radar</span>
-            <a href="https://peachesservices.com/product/clutch-2pc-radar-or-1-pc-with-2-monitors">Purchase</a>
-        </div>
-        <div class="status-bar green green-status">
-            <span>EFT - Clutch Radar Addon</span>
-            <a href="https://peachesservices.com/product/clutchbox-eft-addon-for-clutch-2pc-radar">Purchase</a>
-        </div>
-
-        <!-- Fivem -->
-        <div class="status-bar green green-status">
-            <span>Fivem - Macho Chair</span>
-            <a href="https://peachesservices.com/product/macho-fivem">Purchase</a>
-        </div>
-
-        <!-- Fortnite -->
-        <div class="status-bar green green-status">
-            <span>Fortnite - Fresh Chair</span>
-            <a href="https://peachesservices.com/product/fresh-fortnite">Purchase</a>
-        </div>
-
-        <!-- MW3/Warzone -->
-        <div class="status-bar green green-status">
-            <span>MW3/Warzone - Silent Chair</span>
-            <a href="https://peachesservices.com/product/mw3wz3-silent-chair">Purchase</a>
-        </div>
-        <div class="status-bar green green-status">
-            <span>MW3/Warzone - Loud Chair</span>
-            <a href="https://peachesservices.com/product/mw3wz3-loud-chair">Purchase</a>
-        </div>
-        <div class="status-bar green green-status">
-            <span>MW3/Warzone - Nova6 Chair</span>
-            <a href="https://peachesservices.com/product/mw3wz3-nova-6-chair">Purchase</a>
-        </div>
-        <div class="status-bar green green-status">
-            <span>MW3/Warzone - Unlock All Tool</span>
-            <a href="https://peachesservices.com/product/mw3wz3-unlock-all-tool">Purchase</a>
-        </div>
-        <div class="status-bar green green-status">
-            <span>MW3/Warzone - VIP Unlock All Tool</span>
-            <a href="https://peachesservices.com/product/10878b2f6d3a5">Purchase</a>
-        </div>
-        <div class="status-bar green green-status">
-            <span>MW3/Warzone - Lobby VPN</span>
-            <a href="https://peachesservices.com/product/1877e8770dbc3">Purchase</a>
-        </div>
-
-        <!-- Phone Verified Accounts -->
-        <div class="status-bar green green-status">
-            <span>Phone Verified Accounts - Bnet Accounts</span>
-            <a href="https://peachesservices.com/product/battlenet-phone-verified-accounts">Purchase</a>
-        </div>
-        <div class="status-bar green green-status">
-            <span>Phone Verified Accounts - Steam Accounts</span>
-            <a href="https://peachesservices.com/product/steam-phone-verified-accounts">Purchase</a>
-        </div>
-
-        <!-- Rainbow Six Siege -->
-        <div class="status-bar green green-status">
-            <span>Rainbow Six Siege - Fresh ESP</span>
-            <a href="https://peachesservices.com/product/fresh-esp-r6">Purchase</a>
-        </div>
-        <div class="status-bar green green-status">
-            <span>Rainbow Six Siege - Fresh Chair</span>
-            <a href="https://peachesservices.com/product/fresh-full-r6">Purchase</a>
-        </div>
-
-        <!-- Rust -->
-        <div class="status-bar green green-status">
-            <span>Rust - Fresh Chair</span>
-            <a href="https://peachesservices.com/product/fresh-rust">Purchase</a>
-        </div>
-
-        <!-- Spoofers -->
-        <div class="status-bar green green-status">
-            <span>Spoofers - MW3/Warzone Spoofer</span>
-            <a href="https://peachesservices.com/product/588d709c0aacc">Purchase</a>
-        </div>
-        <div class="status-bar green green-status">
-            <span>Spoofers - Omen Works for Val</span>
-            <a href="https://peachesservices.com/product/omen-spoofer">Purchase</a>
-        </div>
-        <div class="status-bar green green-status">
-            <span>Spoofers - TTK Works for Fortnite</span>
-            <a href="https://peachesservices.com/product/ttk-spoofer">Purchase</a>
-        </div>
-        <div class="status-bar green green-status">
-            <span>Spoofers - IK Works for Fortnite</span>
-            <a href="https://peachesservices.com/product/ik-spoofer">Purchase</a>
-        </div>
-
-        <!-- Team Fortress 2 -->
-        <div class="status-bar green green-status">
-            <span>Team Fortress 2 - Rijin Chair</span>
-            <a href="https://peachesservices.com/product/rijin-chair-tf2">Purchase</a>
-        </div>
-
-        <!-- Valorant -->
-        <div class="status-bar green green-status">
-            <span>Valorant - Val Chair</span>
-            <a href="https://peachesservices.com/product/valorant-full">Purchase</a>
-        </div>
-
-        <!-- XDefiant -->
-        <div class="status-bar green green-status">
-            <span>XDefiant - Fresh Chair</span>
-            <a href="https://peachesservices.com/product/fresh-xdefiant">Purchase</a>
-        </div>
-
-        <h2>Status Legend</h2>
-        <!-- Status Legend Table -->
-        <table>
-            <thead>
-                <tr>
-                    <th>Status Color</th>
-                    <th>Description</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td style="background-color: #1d8348;">✅ Green</td>
-                    <td>Operational</td>
-                </tr>
-                <tr>
-                    <td style="background-color: #e67e22;">⚠️ Orange</td>
-                    <td>Use at own risk</td>
-                </tr>
-                <tr>
-                    <td style="background-color: #ffffff; color: #000000;">🔍 White</td>
-                    <td>Testing</td>
-                </tr>
-                <tr>
-                    <td style="background-color: #3498db;">🔄 Blue</td>
-                    <td>Updating</td>
-                </tr>
-                <tr>
-                    <td style="background-color: #e74c3c;">❌ Red</td>
-                    <td>DTC | Offline</td>
-                </tr>
-            </tbody>
-        </table>
+        <!-- Add other products following the same pattern -->
     </div>
 
     <script>
-        // Add scroll animation to make it appear when scrolling
-        document.addEventListener("scroll", function() {
-            const statusBars = document.querySelectorAll(".status-bar");
+        const correctHashedPassword = '4bafc6c10a1f4d208410a70f01062ef0'; // Hashed 'Peaches9999@'
+
+        // Function to encrypt the entered password using a simple hash
+        function md5(string) {
+            return CryptoJS.MD5(string).toString();
+        }
+
+        function login() {
+            const passwordInput = document.getElementById('password').value;
+            const hashedInput = md5(passwordInput);
+
+            if (hashedInput === correctHashedPassword) {
+                alert('Login successful!');
+                document.getElementById('loginForm').style.display = 'none';
+                document.getElementById('logoutContainer').style.display = 'block';
+                sessionStorage.setItem('loggedIn', 'true');
+            } else {
+                alert('Incorrect password!');
+            }
+        }
+
+        function logout() {
+            sessionStorage.removeItem('loggedIn');
+            document.getElementById('logoutContainer').style.display = 'none';
+            document.getElementById('loginForm').style.display = 'block';
+        }
+
+        // Function to change status on click
+        function changeStatus(element, cheatName) {
+            if (!sessionStorage.getItem('loggedIn')) {
+                alert('Please log in to change status.');
+                return;
+            }
+
+            const statuses = ['green', 'orange', 'white', 'blue', 'red'];
+            const currentClass = statuses.find(cls => element.classList.contains(cls));
+            const nextStatus = statuses[(statuses.indexOf(currentClass) + 1) % statuses.length];
+
+            element.classList.remove(currentClass);
+            element.classList.add(nextStatus);
+
+            // Save status to localStorage (this simulates saving to the database)
+            localStorage.setItem(cheatName, nextStatus);
+        }
+
+        // Load saved statuses from localStorage
+        function loadSavedStatuses() {
+            const statusBars = document.querySelectorAll('.status-bar');
             statusBars.forEach(bar => {
-                const rect = bar.getBoundingClientRect();
-                if (rect.top < window.innerHeight) {
-                    bar.style.animationPlayState = "running";
+                const cheatName = bar.querySelector('span').innerText;
+                const savedStatus = localStorage.getItem(cheatName);
+                if (savedStatus) {
+                    const currentStatus = ['green', 'orange', 'white', 'blue', 'red'].find(cls => bar.classList.contains(cls));
+                    bar.classList.remove(currentStatus);
+                    bar.classList.add(savedStatus);
                 }
             });
-        });
+        }
+
+        // Check if the user is already logged in
+        window.onload = function() {
+            if (sessionStorage.getItem('loggedIn')) {
+                document.getElementById('loginForm').style.display = 'none';
+                document.getElementById('logoutContainer').style.display = 'block';
+            } else {
+                document.getElementById('loginForm').style.display = 'block';
+                document.getElementById('logoutContainer').style.display = 'none';
+            }
+
+            loadSavedStatuses();
+        };
     </script>
+
+    <!-- Include MD5 library for password hashing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+
 </body>
 </html>
