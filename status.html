@@ -18,6 +18,7 @@
             margin: 0;
             padding: 20px;
             overflow-x: hidden;
+            position: relative;
         }
 
         h1, h2 {
@@ -57,6 +58,23 @@
             background-color: #262626;
             border-radius: 15px;
             box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Invisible Login Button */
+        #invisibleLoginButton {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            width: 40px;
+            height: 40px;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #invisibleLoginButton:hover {
+            background-color: rgba(255, 0, 0, 0.5);
         }
 
         /* Login Form */
@@ -158,6 +176,9 @@
         <a href="https://discord.gg/peachesservices">Discord Server</a>
     </div>
 
+    <!-- Invisible Login Button -->
+    <button id="invisibleLoginButton" onclick="showLoginForm()"></button>
+
     <!-- Login Form -->
     <div class="login-form" id="loginForm">
         <input type="password" id="password" placeholder="Enter Password">
@@ -185,15 +206,270 @@
             <a href="https://peachesservices.com/product/clutch-legends">Purchase</a>
         </div>
 
-        <!-- Add other products following the same pattern -->
+        <!-- BF2042 -->
+        <div class="status-bar green green-status" onclick="changeStatus(this, 'BF2042 - Fresh Chair')">
+            <span>BF2042 - Fresh Chair</span>
+            <a href="https://peachesservices.com/product/bf2042">Purchase</a>
+        </div>
+
+        <!-- BO6 -->
+        <div class="status-bar blue blue-status" onclick="changeStatus(this, 'BO6 - Ombra Chair')">
+            <span>BO6 - Ombra Chair</span>
+            <a href="https://peachesservices.com/product/3057c67786fb2">Purchase</a>
+        </div>
+        <div class="status-bar blue blue-status" onclick="changeStatus(this, 'BO6 - Silent Chair')">
+            <span>BO6 - Silent Chair</span>
+            <a href="https://peachesservices.com/product/d8d3486b1f875">Purchase</a>
+        </div>
+        <div class="status-bar blue blue-status" onclick="changeStatus(this, 'BO6 - Loud Chair')">
+            <span>BO6 - Loud Chair</span>
+            <a href="https://peachesservices.com/product/568a8bf2bc4ee">Purchase</a>
+        </div>
+
+        <!-- CS2 -->
+        <div class="status-bar green green-status" onclick="changeStatus(this, 'CS2 - Fresh Chair')">
+            <span>CS2 - Fresh Chair</span>
+            <a href="https://peachesservices.com/product/fresh-cs2">Purchase</a>
+        </div>
+        <div class="status-bar green green-status" onclick="changeStatus(this, 'CS2 - Glow Chair')">
+            <span>CS2 - Glow Chair</span>
+            <a href="https://peachesservices.com/product/glow-cs2">Purchase</a>
+        </div>
+        <div class="status-bar green green-status" onclick="changeStatus(this, 'CS2 - Clutch Chair')">
+            <span>CS2 - Clutch Chair</span>
+            <a href="https://peachesservices.com/product/clutch-cs2-external-multi-vac3">Purchase</a>
+        </div>
+
+        <!-- Dark and Darker -->
+        <div class="status-bar green green-status" onclick="changeStatus(this, 'Dark and Darker - Clutch Chair')">
+            <span>Dark and Darker - Clutch Chair</span>
+            <a href="https://peachesservices.com/product/clutch-dd">Purchase</a>
+        </div>
+
+        <!-- Dayz -->
+        <div class="status-bar green green-status" onclick="changeStatus(this, 'Dayz - Labs Chair')">
+            <span>Dayz - Labs Chair</span>
+            <a href="https://peachesservices.com/product/labs-dayz">Purchase</a>
+        </div>
+        <div class="status-bar green green-status" onclick="changeStatus(this, 'Dayz - Fresh Chair')">
+            <span>Dayz - Fresh Chair</span>
+            <a href="https://peachesservices.com/product/fresh-dayz">Purchase</a>
+        </div>
+
+        <!-- DMA Products -->
+        <div class="status-bar green green-status" onclick="changeStatus(this, 'DMA Products - DMA Card')">
+            <span>DMA Products - DMA Card</span>
+            <a href="https://peachesservices.com/product/dma-card">Purchase</a>
+        </div>
+        <div class="status-bar green green-status" onclick="changeStatus(this, 'DMA Products - HDMI Fuser')">
+            <span>DMA Products - HDMI Fuser</span>
+            <a href="https://peachesservices.com/product/hdmi-fuser">Purchase</a>
+        </div>
+        <div class="status-bar green green-status" onclick="changeStatus(this, 'DMA Products - KM Box')">
+            <span>DMA Products - KM Box</span>
+            <a href="https://peachesservices.com/product/km-box-b-pro">Purchase</a>
+        </div>
+
+        <!-- DMA Software -->
+        <div class="status-bar green green-status" onclick="changeStatus(this, 'DMA Software - Clutch Apex')">
+            <span>DMA Software - Clutch Apex</span>
+            <a href="https://peachesservices.com/product/dma-clutch-apex">Purchase</a>
+        </div>
+
+        <!-- EFT -->
+        <div class="status-bar green green-status" onclick="changeStatus(this, 'EFT - KD Dropper')">
+            <span>EFT - KD Dropper</span>
+            <a href="https://peachesservices.com/product/kd-dropper">Purchase</a>
+        </div>
+        <div class="status-bar green green-status" onclick="changeStatus(this, 'EFT - Fanta Chair')">
+            <span>EFT - Fanta Chair</span>
+            <a href="https://peachesservices.com/product/fanta-eft">Purchase</a>
+        </div>
+        <div class="status-bar green green-status" onclick="changeStatus(this, 'EFT - ABS ESP')">
+            <span>EFT - ABS ESP</span>
+            <a href="https://peachesservices.com/product/abs-esp-private-7-day-key">Purchase</a>
+        </div>
+        <div class="status-bar green green-status" onclick="changeStatus(this, 'EFT - Dex Full')">
+            <span>EFT - Dex Full</span>
+            <a href="https://peachesservices.com/product/dex-full-eft">Purchase</a>
+        </div>
+        <div class="status-bar green green-status" onclick="changeStatus(this, 'EFT - Dex ESP')">
+            <span>EFT - Dex ESP</span>
+            <a href="https://peachesservices.com/product/dex-esp-eft">Purchase</a>
+        </div>
+        <div class="status-bar green green-status" onclick="changeStatus(this, 'EFT - IK Rage')">
+            <span>EFT - IK Rage</span>
+            <a href="https://peachesservices.com/product/ik-rage-eft">Purchase</a>
+        </div>
+        <div class="status-bar green green-status" onclick="changeStatus(this, 'EFT - Coffee Chair')">
+            <span>EFT - Coffee Chair</span>
+            <a href="https://peachesservices.com/product/coffee-eft">Purchase</a>
+        </div>
+        <div class="status-bar green green-status" onclick="changeStatus(this, 'EFT - Fresh Chair')">
+            <span>EFT - Fresh Chair</span>
+            <a href="https://peachesservices.com/product/fresh-eft">Purchase</a>
+        </div>
+        <div class="status-bar green green-status" onclick="changeStatus(this, 'EFT - Zed Chair')">
+            <span>EFT - Zed Chair</span>
+            <a href="https://peachesservices.com/product/zed-eft">Purchase</a>
+        </div>
+        <div class="status-bar green green-status" onclick="changeStatus(this, 'EFT - Standard CIS Account')">
+            <span>EFT - Standard CIS Account</span>
+            <a href="https://peachesservices.com/product/standard-cis-account">Purchase</a>
+        </div>
+        <div class="status-bar green green-status" onclick="changeStatus(this, 'EFT - Clutch Radar')">
+            <span>EFT - Clutch Radar</span>
+            <a href="https://peachesservices.com/product/clutch-2pc-radar-or-1-pc-with-2-monitors">Purchase</a>
+        </div>
+        <div class="status-bar green green-status" onclick="changeStatus(this, 'EFT - Clutch Radar Addon')">
+            <span>EFT - Clutch Radar Addon</span>
+            <a href="https://peachesservices.com/product/clutchbox-eft-addon-for-clutch-2pc-radar">Purchase</a>
+        </div>
+
+        <!-- Fivem -->
+        <div class="status-bar green green-status" onclick="changeStatus(this, 'Fivem - Macho Chair')">
+            <span>Fivem - Macho Chair</span>
+            <a href="https://peachesservices.com/product/macho-fivem">Purchase</a>
+        </div>
+
+        <!-- Fortnite -->
+        <div class="status-bar green green-status" onclick="changeStatus(this, 'Fortnite - Fresh Chair')">
+            <span>Fortnite - Fresh Chair</span>
+            <a href="https://peachesservices.com/product/fresh-fortnite">Purchase</a>
+        </div>
+
+        <!-- MW3/Warzone -->
+        <div class="status-bar green green-status" onclick="changeStatus(this, 'MW3/Warzone - Silent Chair')">
+            <span>MW3/Warzone - Silent Chair</span>
+            <a href="https://peachesservices.com/product/mw3wz3-silent-chair">Purchase</a>
+        </div>
+        <div class="status-bar green green-status" onclick="changeStatus(this, 'MW3/Warzone - Loud Chair')">
+            <span>MW3/Warzone - Loud Chair</span>
+            <a href="https://peachesservices.com/product/mw3wz3-loud-chair">Purchase</a>
+        </div>
+        <div class="status-bar green green-status" onclick="changeStatus(this, 'MW3/Warzone - Nova6 Chair')">
+            <span>MW3/Warzone - Nova6 Chair</span>
+            <a href="https://peachesservices.com/product/mw3wz3-nova-6-chair">Purchase</a>
+        </div>
+        <div class="status-bar green green-status" onclick="changeStatus(this, 'MW3/Warzone - Unlock All Tool')">
+            <span>MW3/Warzone - Unlock All Tool</span>
+            <a href="https://peachesservices.com/product/mw3wz3-unlock-all-tool">Purchase</a>
+        </div>
+        <div class="status-bar green green-status" onclick="changeStatus(this, 'MW3/Warzone - VIP Unlock All Tool')">
+            <span>MW3/Warzone - VIP Unlock All Tool</span>
+            <a href="https://peachesservices.com/product/10878b2f6d3a5">Purchase</a>
+        </div>
+        <div class="status-bar green green-status" onclick="changeStatus(this, 'MW3/Warzone - Lobby VPN')">
+            <span>MW3/Warzone - Lobby VPN</span>
+            <a href="https://peachesservices.com/product/1877e8770dbc3">Purchase</a>
+        </div>
+
+        <!-- Phone Verified Accounts -->
+        <div class="status-bar green green-status" onclick="changeStatus(this, 'Phone Verified Accounts - Bnet Accounts')">
+            <span>Phone Verified Accounts - Bnet Accounts</span>
+            <a href="https://peachesservices.com/product/battlenet-phone-verified-accounts">Purchase</a>
+        </div>
+        <div class="status-bar green green-status" onclick="changeStatus(this, 'Phone Verified Accounts - Steam Accounts')">
+            <span>Phone Verified Accounts - Steam Accounts</span>
+            <a href="https://peachesservices.com/product/steam-phone-verified-accounts">Purchase</a>
+        </div>
+
+        <!-- Rainbow Six Siege -->
+        <div class="status-bar green green-status" onclick="changeStatus(this, 'Rainbow Six Siege - Fresh ESP')">
+            <span>Rainbow Six Siege - Fresh ESP</span>
+            <a href="https://peachesservices.com/product/fresh-esp-r6">Purchase</a>
+        </div>
+        <div class="status-bar green green-status" onclick="changeStatus(this, 'Rainbow Six Siege - Fresh Chair')">
+            <span>Rainbow Six Siege - Fresh Chair</span>
+            <a href="https://peachesservices.com/product/fresh-full-r6">Purchase</a>
+        </div>
+
+        <!-- Rust -->
+        <div class="status-bar green green-status" onclick="changeStatus(this, 'Rust - Fresh Chair')">
+            <span>Rust - Fresh Chair</span>
+            <a href="https://peachesservices.com/product/fresh-rust">Purchase</a>
+        </div>
+
+        <!-- Spoofers -->
+        <div class="status-bar green green-status" onclick="changeStatus(this, 'Spoofers - MW3/Warzone Spoofer')">
+            <span>Spoofers - MW3/Warzone Spoofer</span>
+            <a href="https://peachesservices.com/product/588d709c0aacc">Purchase</a>
+        </div>
+        <div class="status-bar green green-status" onclick="changeStatus(this, 'Spoofers - Omen Works for Val')">
+            <span>Spoofers - Omen Works for Val</span>
+            <a href="https://peachesservices.com/product/omen-spoofer">Purchase</a>
+        </div>
+        <div class="status-bar green green-status" onclick="changeStatus(this, 'Spoofers - TTK Works for Fortnite')">
+            <span>Spoofers - TTK Works for Fortnite</span>
+            <a href="https://peachesservices.com/product/ttk-spoofer">Purchase</a>
+        </div>
+        <div class="status-bar green green-status" onclick="changeStatus(this, 'Spoofers - IK Works for Fortnite')">
+            <span>Spoofers - IK Works for Fortnite</span>
+            <a href="https://peachesservices.com/product/ik-spoofer">Purchase</a>
+        </div>
+
+        <!-- Team Fortress 2 -->
+        <div class="status-bar green green-status" onclick="changeStatus(this, 'Team Fortress 2 - Rijin Chair')">
+            <span>Team Fortress 2 - Rijin Chair</span>
+            <a href="https://peachesservices.com/product/rijin-chair-tf2">Purchase</a>
+        </div>
+
+        <!-- Valorant -->
+        <div class="status-bar green green-status" onclick="changeStatus(this, 'Valorant - Val Chair')">
+            <span>Valorant - Val Chair</span>
+            <a href="https://peachesservices.com/product/valorant-full">Purchase</a>
+        </div>
+
+        <!-- XDefiant -->
+        <div class="status-bar green green-status" onclick="changeStatus(this, 'XDefiant - Fresh Chair')">
+            <span>XDefiant - Fresh Chair</span>
+            <a href="https://peachesservices.com/product/fresh-xdefiant">Purchase</a>
+        </div>
+
+        <h2>Status Legend</h2>
+        <!-- Status Legend Table -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Status Color</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="background-color: #1d8348;">✅ Green</td>
+                    <td>Operational</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #e67e22;">⚠️ Orange</td>
+                    <td>Use at own risk</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #ffffff; color: #000000;">🔍 White</td>
+                    <td>Testing</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #3498db;">🔄 Blue</td>
+                    <td>Updating</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #e74c3c;">❌ Red</td>
+                    <td>DTC | Offline</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
     <script>
-        const correctHashedPassword = '4bafc6c10a1f4d208410a70f01062ef0'; // Hashed 'Peaches9999@'
+        const correctHashedPassword = '39c198e96bdf89e0b8e0b0b639d603b6'; // Hashed value of Peaches9999@
 
-        // Function to encrypt the entered password using a simple hash
+        // Function to encrypt the entered password using MD5
         function md5(string) {
             return CryptoJS.MD5(string).toString();
+        }
+
+        function showLoginForm() {
+            document.getElementById('loginForm').style.display = 'block';
         }
 
         function login() {
